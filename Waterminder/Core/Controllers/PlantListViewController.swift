@@ -132,8 +132,21 @@ extension PlantListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let plant = plantListViewModel.plants[indexPath.row]
-        cell.configure(name: plant.name, overview: plant.description, photo: plant.photo, wateringDateString: plant.wateringDate)
+        cell.configure(name: plant.name, overview: plant.overview, photo: plant.photo, wateringDateString: plant.wateringDate)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        router.navigateTo(
+            route: .editPlant(
+                viewModel: EditPlantViewModel(
+                    plantService: plantListViewModel.plantService,
+                    plant: plantListViewModel.plants[indexPath.row]
+                )
+            ),
+            animated: true)
+        
     }
 
 }

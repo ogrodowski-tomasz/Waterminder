@@ -67,7 +67,15 @@ class PlantService: NSObject, AnyPlantService {
     }
 
     func updatePlant(id: NSManagedObjectID, newName: String, newOverview: String, newWateringDate: Date, newPhoto: UIImage) {
-
+        if let plant = Plant.byId(id, context: coreDataStack.viewContext) {
+            plant.name = newName
+            plant.overview = newOverview
+            plant.wateringDate = newWateringDate
+            plant.photo = newPhoto
+            coreDataStack.saveContext()
+        } else {
+            print("DEBUG: no plant with this id")
+        }
     }
 
 }

@@ -9,7 +9,7 @@ import UIKit
 
 enum AppRoutes {
     case addNewPlant(viewModel: AnyAddPlantViewModel)
-//    case editPlant(plantModel: PlantModel)
+    case editPlant(viewModel: AnyEditPlantViewModel)
 }
 
 protocol AnyRouter {
@@ -31,6 +31,8 @@ class AppRouter: AnyRouter {
         switch route {
         case .addNewPlant(let viewModel):
             vc = AddPlantViewController(viewModel: viewModel, router: self)
+        case .editPlant(let viewModel):
+            vc = EditPlantViewController(viewModel: viewModel, router: self)
         }
         navigationController.pushViewController(vc, animated: true)
     }

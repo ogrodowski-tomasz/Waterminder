@@ -23,6 +23,9 @@
 		1E7E7AE129924F0F004E7167 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AE029924F0F004E7167 /* AddPlantViewController.swift */; };
 		1E7E7AE4299252F1004E7167 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AE3299252F1004E7167 /* AppRouter.swift */; };
 		1E7E7AE729926E5E004E7167 /* PlantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AE629926E5E004E7167 /* PlantTableViewCell.swift */; };
+		1E7E7AE929927A1E004E7167 /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AE829927A1E004E7167 /* EditPlantViewController.swift */; };
+		1E7E7AEB29927A38004E7167 /* EditPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AEA29927A38004E7167 /* EditPlantViewModel.swift */; };
+		1E7E7AEE29928AB4004E7167 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AED29928AB4004E7167 /* Date+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		1E7E7AE029924F0F004E7167 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
 		1E7E7AE3299252F1004E7167 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		1E7E7AE629926E5E004E7167 /* PlantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTableViewCell.swift; sourceTree = "<group>"; };
+		1E7E7AE829927A1E004E7167 /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
+		1E7E7AEA29927A38004E7167 /* EditPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewModel.swift; sourceTree = "<group>"; };
+		1E7E7AED29928AB4004E7167 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,7 @@
 		1E5A3AFD299165B200E4A750 /* Waterminder */ = {
 			isa = PBXGroup;
 			children = (
+				1E7E7AEC29928AAE004E7167 /* Extensions */,
 				1E7E7AD72991A93F004E7167 /* Services */,
 				1E7E7AD02991A34B004E7167 /* CoreDataManagment */,
 				1E5A3B1D2991712C00E4A750 /* Core */,
@@ -132,6 +139,7 @@
 			children = (
 				1E7E7ADB2991B005004E7167 /* PlantListViewModel.swift */,
 				1E7E7ADD29924D90004E7167 /* AddPlantViewModel.swift */,
+				1E7E7AEA29927A38004E7167 /* EditPlantViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -141,6 +149,7 @@
 			children = (
 				1E5A3B02299165B200E4A750 /* PlantListViewController.swift */,
 				1E7E7AE029924F0F004E7167 /* AddPlantViewController.swift */,
+				1E7E7AE829927A1E004E7167 /* EditPlantViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -159,6 +168,14 @@
 				1E7E7AE629926E5E004E7167 /* PlantTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1E7E7AEC29928AAE004E7167 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1E7E7AED29928AB4004E7167 /* Date+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,11 +252,14 @@
 				1E5A3B03299165B200E4A750 /* PlantListViewController.swift in Sources */,
 				1E5A3AFF299165B200E4A750 /* AppDelegate.swift in Sources */,
 				1E7E7AD42991A46E004E7167 /* Plant+CoreDataProperties.swift in Sources */,
+				1E7E7AEB29927A38004E7167 /* EditPlantViewModel.swift in Sources */,
 				1E7E7ACC2991A195004E7167 /* PlantModel.swift in Sources */,
 				1E7E7ADC2991B005004E7167 /* PlantListViewModel.swift in Sources */,
 				1E7E7AE129924F0F004E7167 /* AddPlantViewController.swift in Sources */,
 				1E7E7AD92991A947004E7167 /* PlantService.swift in Sources */,
+				1E7E7AE929927A1E004E7167 /* EditPlantViewController.swift in Sources */,
 				1E7E7AD62991A576004E7167 /* CoreDataStack.swift in Sources */,
+				1E7E7AEE29928AB4004E7167 /* Date+Extensions.swift in Sources */,
 				1E7E7AE729926E5E004E7167 /* PlantTableViewCell.swift in Sources */,
 				1E7E7ACF2991A2F9004E7167 /* PlantContainer.xcdatamodeld in Sources */,
 				1E7E7AE4299252F1004E7167 /* AppRouter.swift in Sources */,

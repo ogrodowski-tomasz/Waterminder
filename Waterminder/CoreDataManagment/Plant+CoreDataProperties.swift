@@ -22,6 +22,16 @@ extension Plant {
     @NSManaged public var overview: String?
     @NSManaged public var photo: UIImage?
     @NSManaged public var wateringDate: Date?
-
 }
 
+extension Plant {
+    static func byId(_ id: NSManagedObjectID, context: NSManagedObjectContext) -> Plant? {
+        do {
+            return try context.existingObject(with: id) as? Plant
+        } catch {
+            print("DEBUG: Error! \(error)")
+            return nil
+        }
+
+    }
+}
