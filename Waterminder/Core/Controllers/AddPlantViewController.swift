@@ -14,14 +14,16 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
     private let viewModel: AnyAddPlantViewModel
     private let router: AnyRouter
 
-    private let customSheetView: UIView = {
-        let sheetView = UIView()
-        sheetView.translatesAutoresizingMaskIntoConstraints = false
-        sheetView.backgroundColor = UIColor.theme.shamrockGreen
-        sheetView.layer.cornerRadius = 20
-        sheetView.layer.masksToBounds = true
-        return sheetView
-    }()
+//    private let customSheetView: UIView = {
+//        let sheetView = UIView()
+//        sheetView.translatesAutoresizingMaskIntoConstraints = false
+//        sheetView.backgroundColor = UIColor.theme.shamrockGreen
+//        sheetView.layer.cornerRadius = 20
+//        sheetView.layer.masksToBounds = true
+//        return sheetView
+//    }()
+
+    private var customSheetView = UIView()
 
     private let addPhotoButton: UIImageView = {
         let imageView = UIImageView()
@@ -107,6 +109,8 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
     private func setup() {
         navigationItem.setLeftBarButton(dismissBarButton(target: self, action: #selector(handleDismissTap)), animated: true)
         navigationItem.setRightBarButton(saveBarButton(target: self, action: #selector(handleSaveTap)), animated: true)
+        
+        customSheetView = customSheetView(backgroundColor: UIColor.theme.shamrockGreen)
 
         nameTextField.delegate = self
         overviewTextField.delegate = self

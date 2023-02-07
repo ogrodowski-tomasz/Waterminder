@@ -27,4 +27,13 @@ extension UIViewController {
         return button
     }
 
+    func customSheetView(backgroundColor: UIColor?) -> UIView {
+        let sheetView = UIView()
+        sheetView.translatesAutoresizingMaskIntoConstraints = false
+        sheetView.backgroundColor = backgroundColor
+        sheetView.layer.cornerRadius = 20
+        sheetView.layer.masksToBounds = true
+        return sheetView
+    }
+
 }

@@ -15,14 +15,7 @@ class EditPlantViewController: UIViewController {
 
     private let router: AnyRouter
 
-    private let customSheetView: UIView = {
-        let sheetView = UIView()
-        sheetView.backgroundColor = UIColor.theme.night
-        sheetView.translatesAutoresizingMaskIntoConstraints = false
-        sheetView.layer.cornerRadius = 20
-        sheetView.layer.masksToBounds = true
-        return sheetView
-    }()
+    private var customSheetView = UIView()
 
     private let addPhotoButton: UIImageView = {
         let imageView = UIImageView()
@@ -121,6 +114,8 @@ class EditPlantViewController: UIViewController {
     private func setup() {
         navigationItem.setLeftBarButton(dismissBarButton(target: self, action: #selector(handleDismiss)), animated: true)
         navigationItem.setRightBarButton(saveBarButton(target: self, action: #selector(handleSave)), animated: true)
+
+        customSheetView = customSheetView(backgroundColor: UIColor.theme.night)
 
         nameTextField.text = viewModel.initialName
         nameTextField.delegate = self
