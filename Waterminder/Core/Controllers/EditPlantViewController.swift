@@ -15,20 +15,6 @@ class EditPlantViewController: UIViewController {
 
     private let router: AnyRouter
 
-    private let dismissBarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        button.tintColor = .systemRed
-        button.title = "Dismiss"
-        return button
-    }()
-
-    private let saveBarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem()
-        button.tintColor = .systemGreen
-        button.title = "✓ Save"
-        return button
-    }()
-
     private let customSheetView: UIView = {
         let sheetView = UIView()
         sheetView.backgroundColor = UIColor.theme.night
@@ -133,13 +119,8 @@ class EditPlantViewController: UIViewController {
     }
 
     private func setup() {
-        dismissBarButton.target = self
-        dismissBarButton.action = #selector(handleDismiss)
-        navigationItem.setLeftBarButton(dismissBarButton, animated: true)
-
-        saveBarButton.target = self
-        saveBarButton.action = #selector(handleSave)
-        navigationItem.setRightBarButton(saveBarButton, animated: true)
+        navigationItem.setLeftBarButton(dismissBarButton(target: self, action: #selector(handleDismiss)), animated: true)
+        navigationItem.setRightBarButton(saveBarButton(target: self, action: #selector(handleSave)), animated: true)
 
         nameTextField.text = viewModel.initialName
         nameTextField.delegate = self
