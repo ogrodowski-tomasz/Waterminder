@@ -9,6 +9,8 @@ import UIKit
 
 class EditPlantViewController: UIViewController {
 
+    static let imageSide: CGFloat = 250
+
     let viewModel: AnyEditPlantViewModel
 
     private let router: AnyRouter
@@ -42,7 +44,7 @@ class EditPlantViewController: UIViewController {
         imageView.image = UIImage(named: "plus_photo")?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = UIColor.theme.night
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 20
+        imageView.layer.cornerRadius = EditPlantViewController.imageSide / 2
         imageView.layer.masksToBounds = true
         return imageView
     }()
@@ -100,8 +102,6 @@ class EditPlantViewController: UIViewController {
         return picker
     }()
 
-    let imagePickerController = UIImagePickerController()
-
     init(viewModel: AnyEditPlantViewModel, router: AnyRouter) {
         self.viewModel = viewModel
         self.router = router
@@ -142,7 +142,10 @@ class EditPlantViewController: UIViewController {
         navigationItem.setRightBarButton(saveBarButton, animated: true)
 
         nameTextField.text = viewModel.initialName
+        nameTextField.delegate = self
         overviewTextField.text = viewModel.initialOverview
+        overviewTextField.delegate = self
+
         datePicker.date = viewModel.initialWateringTime
 
         addPhotoButton.image = viewModel.initialPhoto
@@ -150,7 +153,10 @@ class EditPlantViewController: UIViewController {
         addPhotoButton.addGestureRecognizer(addPhotoTap)
         addPhotoButton.isUserInteractionEnabled = true
 
-        imagePickerController.delegate = self
+        let bgTap = UITapGestureRecognizer(target: self, action: #selector(handleBgTap))
+        view.addGestureRecognizer(bgTap)
+
+
     }
 
     private func layout() {
@@ -183,10 +189,16 @@ class EditPlantViewController: UIViewController {
             customSheetView.bottomAnchor.constraint(equalToSystemSpacingBelow: customSheetStack.bottomAnchor, multiplier: 5),
 
             addPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            addPhotoButton.widthAnchor.constraint(equalToConstant: 250),
+            addPhotoButton.widthAnchor.constraint(equalToConstant: Self.imageSide),
             addPhotoButton.topAnchor.constraint(equalToSystemSpacingBelow: customSheetView.bottomAnchor, multiplier: 5),
-            addPhotoButton.heightAnchor.constraint(equalToConstant: 250),
+            addPhotoButton.heightAnchor.constraint(equalToConstant: Self.imageSide),
         ])
+    }
+
+    @objc
+    private func handleBgTap() {
+        nameTextField.resignFirstResponder()
+        overviewTextField.resignFirstResponder()
     }
 
     @objc
@@ -229,4 +241,16 @@ extension EditPlantViewController: UIImagePickerControllerDelegate, UINavigation
         }
         dismiss(animated: true)
     }
+}
+
+extension EditPlantViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == nameTextField {
+            overviewTextField.becomeFirstResponder()
+        } else {
+            overviewTextField.resignFirstResponder()
+        }
+        return true
+    }
+
 }

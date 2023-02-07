@@ -9,6 +9,8 @@ import UIKit
 
 class AddPlantViewController: UIViewController, UITextFieldDelegate {
 
+    static let addPhotoButtonHeight: CGFloat = 200
+
     private let viewModel: AnyAddPlantViewModel
     private let router: AnyRouter
 
@@ -35,13 +37,15 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
         return sheetView
     }()
 
-    private let addPhotoButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        var plusImage = UIImage(named: "plus_photo")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(plusImage, for: .normal)
-        button.tintColor = UIColor.theme.shamrockGreen
-        return button
+    private let addPhotoButton: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "plus_photo")?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor.theme.shamrockGreen
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = AddPlantViewController.addPhotoButtonHeight / 2
+        imageView.layer.masksToBounds = true
+        return imageView
     }()
 
     private let nameTextField: UITextField = {
@@ -115,18 +119,23 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
     }
 
     private func setup() {
-        addPhotoButton.addTarget(self, action: #selector(handlePlusButtonTapped), for: .touchUpInside)
         dismissBarButton.target = self
         dismissBarButton.action = #selector(handleDismissTap)
         navigationItem.setLeftBarButton(dismissBarButton, animated: true)
+
         saveBarButton.target = self
         saveBarButton.action = #selector(handleSaveTap)
         navigationItem.setRightBarButton(saveBarButton, animated: true)
+
         nameTextField.delegate = self
         overviewTextField.delegate = self
 
         let bgTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBgTap))
         view.addGestureRecognizer(bgTapGesture)
+
+        let presentImagePickerGesture = UITapGestureRecognizer(target: self, action: #selector(handleAddPhotoTap))
+        addPhotoButton.isUserInteractionEnabled = true
+        addPhotoButton.addGestureRecognizer(presentImagePickerGesture)
     }
 
     private func layout() {
@@ -140,7 +149,8 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
         NSLayoutConstraint.activate([
             addPhotoButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 5),
             addPhotoButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            addPhotoButton.bottomAnchor.constraint(equalToSystemSpacingBelow: view.centerYAnchor, multiplier: -7),
+            addPhotoButton.widthAnchor.constraint(equalToConstant: AddPlantViewController.addPhotoButtonHeight),
+            addPhotoButton.heightAnchor.constraint(equalToConstant: AddPlantViewController.addPhotoButtonHeight),
 
             customSheetView.topAnchor.constraint(equalToSystemSpacingBelow: view.centerYAnchor, multiplier: 0),
             customSheetView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 0),
@@ -169,15 +179,14 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
         ])
     }
 
-    @objc
-    private func handlePlusButtonTapped() {
-        print("DEBUG: present image picker")
+    private func resignTextFields() {
+        nameTextField.resignFirstResponder()
+        overviewTextField.resignFirstResponder()
     }
 
     @objc
     private func handleBgTap() {
-        nameTextField.resignFirstResponder()
-        overviewTextField.resignFirstResponder()
+        resignTextFields()
     }
 
     @objc
@@ -187,13 +196,29 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
 
     @objc
     private func handleSaveTap() {
-        guard let defaultImage = UIImage(named: "plant") else { return }
+        guard let defaultImage = addPhotoButton.image else { return }
         viewModel.addPlant(
             name: nameTextField.text ?? "N/A",
             overview: overviewTextField.text ?? "N/A",
             wateringDate: datePicker.date,
             photo: defaultImage)
         router.pop(animated: true)
+    }
+
+    @objc
+    private func handleAddPhotoTap() {
+        resignTextFields()
+        let actionSheet = UIAlertController(title: "Source", message: "How do you want to add photo!", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.router.navigateTo(route: .imagePicker(sourceType: .camera, delegate: self), animated: true)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.router.navigateTo(route: .imagePicker(sourceType: .library, delegate: self), animated: true)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        navigationController?.present(actionSheet, animated: true)
     }
 
 
@@ -204,6 +229,17 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
             overviewTextField.resignFirstResponder()
         }
         return true
+    }
+}
+
+extension AddPlantViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            addPhotoButton.image = pickedImage
+        } else {
+            print("DEBUG: Couldnt parse image")
+        }
+        dismiss(animated: true)
     }
 }
 
