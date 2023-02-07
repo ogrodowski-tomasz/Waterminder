@@ -12,11 +12,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: PlantListViewController())
+
+
+
+        let navigationController = UINavigationController()
+        let router: AnyRouter = AppRouter(navigationController: navigationController)
+        let plantListVC = PlantListViewController(
+            plantListViewModel: PlantListViewModel(plantService: PlantService()),
+            router: router)
+        navigationController.viewControllers = [plantListVC]
+
+        window?.rootViewController = navigationController
+
 
         return true
     }

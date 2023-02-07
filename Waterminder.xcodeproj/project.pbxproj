@@ -12,8 +12,17 @@
 		1E5A3B08299165B300E4A750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E5A3B07299165B300E4A750 /* Assets.xcassets */; };
 		1E5A3B0B299165B300E4A750 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E5A3B09299165B300E4A750 /* LaunchScreen.storyboard */; };
 		1E5A3B13299166A500E4A750 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3B12299166A500E4A750 /* ColorTheme.swift */; };
-		1E5A3B1729916E7200E4A750 /* WaterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3B1629916E7200E4A750 /* WaterListViewModel.swift */; };
 		1E7E7ACC2991A195004E7167 /* PlantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7ACB2991A195004E7167 /* PlantModel.swift */; };
+		1E7E7ACF2991A2F9004E7167 /* PlantContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7ACD2991A2F9004E7167 /* PlantContainer.xcdatamodeld */; };
+		1E7E7AD22991A35B004E7167 /* UIImageTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AD12991A35B004E7167 /* UIImageTransformer.swift */; };
+		1E7E7AD42991A46E004E7167 /* Plant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AD32991A46E004E7167 /* Plant+CoreDataProperties.swift */; };
+		1E7E7AD62991A576004E7167 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AD52991A576004E7167 /* CoreDataStack.swift */; };
+		1E7E7AD92991A947004E7167 /* PlantService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AD82991A947004E7167 /* PlantService.swift */; };
+		1E7E7ADC2991B005004E7167 /* PlantListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7ADB2991B005004E7167 /* PlantListViewModel.swift */; };
+		1E7E7ADE29924D90004E7167 /* AddPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7ADD29924D90004E7167 /* AddPlantViewModel.swift */; };
+		1E7E7AE129924F0F004E7167 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AE029924F0F004E7167 /* AddPlantViewController.swift */; };
+		1E7E7AE4299252F1004E7167 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AE3299252F1004E7167 /* AppRouter.swift */; };
+		1E7E7AE729926E5E004E7167 /* PlantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AE629926E5E004E7167 /* PlantTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +33,17 @@
 		1E5A3B0A299165B300E4A750 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E5A3B0C299165B300E4A750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E5A3B12299166A500E4A750 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
-		1E5A3B1629916E7200E4A750 /* WaterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterListViewModel.swift; sourceTree = "<group>"; };
 		1E7E7ACB2991A195004E7167 /* PlantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantModel.swift; sourceTree = "<group>"; };
+		1E7E7ACE2991A2F9004E7167 /* PlantContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlantContainer.xcdatamodel; sourceTree = "<group>"; };
+		1E7E7AD12991A35B004E7167 /* UIImageTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageTransformer.swift; sourceTree = "<group>"; };
+		1E7E7AD32991A46E004E7167 /* Plant+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Plant+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1E7E7AD52991A576004E7167 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		1E7E7AD82991A947004E7167 /* PlantService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantService.swift; sourceTree = "<group>"; };
+		1E7E7ADB2991B005004E7167 /* PlantListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantListViewModel.swift; sourceTree = "<group>"; };
+		1E7E7ADD29924D90004E7167 /* AddPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewModel.swift; sourceTree = "<group>"; };
+		1E7E7AE029924F0F004E7167 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
+		1E7E7AE3299252F1004E7167 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		1E7E7AE629926E5E004E7167 /* PlantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,14 +76,14 @@
 		1E5A3AFD299165B200E4A750 /* Waterminder */ = {
 			isa = PBXGroup;
 			children = (
+				1E7E7AD72991A93F004E7167 /* Services */,
+				1E7E7AD02991A34B004E7167 /* CoreDataManagment */,
 				1E5A3B1D2991712C00E4A750 /* Core */,
 				1E5A3AFE299165B200E4A750 /* AppDelegate.swift */,
-				1E5A3B02299165B200E4A750 /* PlantListViewController.swift */,
 				1E5A3B07299165B300E4A750 /* Assets.xcassets */,
 				1E5A3B09299165B300E4A750 /* LaunchScreen.storyboard */,
 				1E5A3B0C299165B300E4A750 /* Info.plist */,
 				1E5A3B12299166A500E4A750 /* ColorTheme.swift */,
-				1E5A3B1629916E7200E4A750 /* WaterListViewModel.swift */,
 			);
 			path = Waterminder;
 			sourceTree = "<group>";
@@ -73,6 +91,10 @@
 		1E5A3B1D2991712C00E4A750 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				1E7E7AE529926E56004E7167 /* Views */,
+				1E7E7AE2299252EC004E7167 /* Router */,
+				1E7E7ADF29924F02004E7167 /* Controllers */,
+				1E7E7ADA2991AFFE004E7167 /* ViewModels */,
 				1E7E7ACA2991A18C004E7167 /* Model */,
 			);
 			path = Core;
@@ -84,6 +106,59 @@
 				1E7E7ACB2991A195004E7167 /* PlantModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1E7E7AD02991A34B004E7167 /* CoreDataManagment */ = {
+			isa = PBXGroup;
+			children = (
+				1E7E7AD12991A35B004E7167 /* UIImageTransformer.swift */,
+				1E7E7ACD2991A2F9004E7167 /* PlantContainer.xcdatamodeld */,
+				1E7E7AD32991A46E004E7167 /* Plant+CoreDataProperties.swift */,
+				1E7E7AD52991A576004E7167 /* CoreDataStack.swift */,
+			);
+			path = CoreDataManagment;
+			sourceTree = "<group>";
+		};
+		1E7E7AD72991A93F004E7167 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1E7E7AD82991A947004E7167 /* PlantService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1E7E7ADA2991AFFE004E7167 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				1E7E7ADB2991B005004E7167 /* PlantListViewModel.swift */,
+				1E7E7ADD29924D90004E7167 /* AddPlantViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		1E7E7ADF29924F02004E7167 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1E5A3B02299165B200E4A750 /* PlantListViewController.swift */,
+				1E7E7AE029924F0F004E7167 /* AddPlantViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1E7E7AE2299252EC004E7167 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				1E7E7AE3299252F1004E7167 /* AppRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		1E7E7AE529926E56004E7167 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1E7E7AE629926E5E004E7167 /* PlantTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,8 +234,17 @@
 				1E5A3B13299166A500E4A750 /* ColorTheme.swift in Sources */,
 				1E5A3B03299165B200E4A750 /* PlantListViewController.swift in Sources */,
 				1E5A3AFF299165B200E4A750 /* AppDelegate.swift in Sources */,
+				1E7E7AD42991A46E004E7167 /* Plant+CoreDataProperties.swift in Sources */,
 				1E7E7ACC2991A195004E7167 /* PlantModel.swift in Sources */,
-				1E5A3B1729916E7200E4A750 /* WaterListViewModel.swift in Sources */,
+				1E7E7ADC2991B005004E7167 /* PlantListViewModel.swift in Sources */,
+				1E7E7AE129924F0F004E7167 /* AddPlantViewController.swift in Sources */,
+				1E7E7AD92991A947004E7167 /* PlantService.swift in Sources */,
+				1E7E7AD62991A576004E7167 /* CoreDataStack.swift in Sources */,
+				1E7E7AE729926E5E004E7167 /* PlantTableViewCell.swift in Sources */,
+				1E7E7ACF2991A2F9004E7167 /* PlantContainer.xcdatamodeld in Sources */,
+				1E7E7AE4299252F1004E7167 /* AppRouter.swift in Sources */,
+				1E7E7ADE29924D90004E7167 /* AddPlantViewModel.swift in Sources */,
+				1E7E7AD22991A35B004E7167 /* UIImageTransformer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +454,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1E7E7ACD2991A2F9004E7167 /* PlantContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1E7E7ACE2991A2F9004E7167 /* PlantContainer.xcdatamodel */,
+			);
+			currentVersion = 1E7E7ACE2991A2F9004E7167 /* PlantContainer.xcdatamodel */;
+			path = PlantContainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1E5A3AF3299165B200E4A750 /* Project object */;
 }
