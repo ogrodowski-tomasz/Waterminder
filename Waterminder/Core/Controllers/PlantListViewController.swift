@@ -132,7 +132,7 @@ extension PlantListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let plant = plantListViewModel.plants[indexPath.row]
-        cell.configure(name: plant.name, overview: plant.description, photo: plant.photo)
+        cell.configure(name: plant.name, overview: plant.description, photo: plant.photo, wateringDateString: plant.wateringDate)
         return cell
     }
 

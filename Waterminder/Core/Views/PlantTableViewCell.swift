@@ -10,12 +10,13 @@ import UIKit
 class PlantTableViewCell: UITableViewCell {
     static let identifier = "PlantTableViewCell"
 
-    static let imageHeight = 50.0
+    static let imageHeight = 80.0
 
     private let photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = UIColor.theme.night
         imageView.layer.cornerRadius = PlantTableViewCell.imageHeight / 2
         imageView.layer.masksToBounds = true
         return imageView
@@ -35,9 +36,19 @@ class PlantTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.theme.night?.withAlphaComponent(0.5)
-        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.font = UIFont.preferredFont(forTextStyle: .footnote)
         label.numberOfLines = 0
         label.textAlignment = .justified
+        return label
+    }()
+
+    private let wateringDateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.theme.night?.withAlphaComponent(0.8)
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.numberOfLines = 1
+        label.textAlignment = .left
         return label
     }()
 
@@ -57,7 +68,7 @@ class PlantTableViewCell: UITableViewCell {
 
     private func layout() {
         addSubview(photoImageView)
-        let labelStack = UIStackView(arrangedSubviews: [nameLabel, overviewLabel])
+        let labelStack = UIStackView(arrangedSubviews: [nameLabel, wateringDateLabel, overviewLabel])
         labelStack.translatesAutoresizingMaskIntoConstraints = false
         labelStack.axis = .vertical
         labelStack.spacing = 5
@@ -78,10 +89,11 @@ class PlantTableViewCell: UITableViewCell {
         ])
     }
 
-    func configure(name: String, overview: String, photo: UIImage) {
+    func configure(name: String, overview: String, photo: UIImage, wateringDateString: String) {
         nameLabel.text = name
         overviewLabel.text = overview
         photoImageView.image = photo
+        wateringDateLabel.text = "Watering time: \(wateringDateString)"
     }
 
 }
