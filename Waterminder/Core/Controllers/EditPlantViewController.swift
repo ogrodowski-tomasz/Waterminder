@@ -36,13 +36,15 @@ class EditPlantViewController: UIViewController {
         return sheetView
     }()
 
-    private let addPhotoButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        var plusImage = UIImage(named: "plus_photo")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(plusImage, for: .normal)
-        button.tintColor = UIColor.theme.night
-        return button
+    private let addPhotoButton: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "plus_photo")?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = UIColor.theme.night
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
+        return imageView
     }()
 
     private let nameTextField: UITextField = {
@@ -98,6 +100,8 @@ class EditPlantViewController: UIViewController {
         return picker
     }()
 
+    let imagePickerController = UIImagePickerController()
+
     init(viewModel: AnyEditPlantViewModel, router: AnyRouter) {
         self.viewModel = viewModel
         self.router = router
@@ -140,7 +144,13 @@ class EditPlantViewController: UIViewController {
         nameTextField.text = viewModel.initialName
         overviewTextField.text = viewModel.initialOverview
         datePicker.date = viewModel.initialWateringTime
-        addPhotoButton.setImage(viewModel.initialPhoto, for: .normal)
+
+        addPhotoButton.image = viewModel.initialPhoto
+        let addPhotoTap = UITapGestureRecognizer(target: self, action: #selector(handleAddPhotoTap))
+        addPhotoButton.addGestureRecognizer(addPhotoTap)
+        addPhotoButton.isUserInteractionEnabled = true
+
+        imagePickerController.delegate = self
     }
 
     private func layout() {
@@ -188,8 +198,35 @@ class EditPlantViewController: UIViewController {
     private func handleSave() {
         guard let newName = nameTextField.text else { return }
         guard let newOverview = overviewTextField.text else { return }
-        viewModel.updatePlant(newName: newName, newOverview: newOverview, newWateringDate: datePicker.date, newPhoto: viewModel.initialPhoto)
+        guard let newPhoto = addPhotoButton.image else { return }
+        viewModel.updatePlant(newName: newName, newOverview: newOverview, newWateringDate: datePicker.date, newPhoto: newPhoto)
         router.pop(animated: true)
     }
 
+    @objc
+    private func handleAddPhotoTap() {
+        let actionSheet = UIAlertController(title: "Source", message: "How do you want to add photo!", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.router.navigateTo(route: .imagePicker(sourceType: .camera, delegate: self), animated: true)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.router.navigateTo(route: .imagePicker(sourceType: .library, delegate: self), animated: true)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        navigationController?.present(actionSheet, animated: true)
+    }
+
+}
+
+extension EditPlantViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            addPhotoButton.image = pickedImage
+        } else {
+            print("DEBUG: Couldnt parse image")
+        }
+        dismiss(animated: true)
+    }
 }

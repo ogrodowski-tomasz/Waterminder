@@ -7,9 +7,15 @@
 
 import UIKit
 
+enum ImagePickerSource {
+    case camera
+    case library
+}
+
 enum AppRoutes {
     case addNewPlant(viewModel: AnyAddPlantViewModel)
     case editPlant(viewModel: AnyEditPlantViewModel)
+    case imagePicker(sourceType: ImagePickerSource, delegate: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate)
 }
 
 protocol AnyRouter {
@@ -33,6 +39,19 @@ class AppRouter: AnyRouter {
             vc = AddPlantViewController(viewModel: viewModel, router: self)
         case .editPlant(let viewModel):
             vc = EditPlantViewController(viewModel: viewModel, router: self)
+        case .imagePicker(let sourceType, let delegate):
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = delegate
+            imagePickerController.allowsEditing = true
+            switch sourceType {
+            case .camera:
+                imagePickerController.sourceType = .camera
+            case .library:
+                imagePickerController.sourceType = .photoLibrary
+            }
+            vc = imagePickerController
+            navigationController.present(vc, animated: true)
+            return
         }
         navigationController.pushViewController(vc, animated: true)
     }

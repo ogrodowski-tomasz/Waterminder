@@ -14,7 +14,7 @@ class PlantTableViewCell: UITableViewCell {
 
     private let photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = UIColor.theme.night
         imageView.layer.cornerRadius = PlantTableViewCell.imageHeight / 2
