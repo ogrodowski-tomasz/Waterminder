@@ -21,18 +21,6 @@ class EditPlantViewController: UIViewController {
     private var overviewTextField = UITextField()
     private var datePickerLabel = UILabel()
     private var datePicker = UIDatePicker()
-//    private let datePicker: UIDatePicker = {
-//        let picker = UIDatePicker()
-//        picker.translatesAutoresizingMaskIntoConstraints = false
-//        picker.datePickerMode = .time
-//        picker.backgroundColor = UIColor.theme.shamrockGreen
-//        picker.layer.borderColor = UIColor.theme.shamrockGreen?.cgColor
-//        picker.layer.borderWidth = 1
-//        picker.layer.cornerRadius = 5
-//        picker.layer.masksToBounds = true
-//        picker.contentHorizontalAlignment = .center
-//        return picker
-//    }()
 
     init(viewModel: AnyEditPlantViewModel, router: AnyRouter) {
         self.viewModel = viewModel

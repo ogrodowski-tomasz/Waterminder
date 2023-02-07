@@ -15,7 +15,6 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
     private let router: AnyRouter
 
     private var customSheetView = UIView()
-
     private var addPhotoView = UIImageView()
     private var nameTextField = UITextField()
     private var overviewTextField = UITextField()
@@ -133,12 +132,16 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
 
     @objc
     private func handleSaveTap() {
-        guard let defaultImage = addPhotoView.image else { return }
+        var photo = UIImage(named: "plant")!
+        guard let newPhoto = addPhotoView.image else { return }
+        if !newPhoto.isEqualTo(image: UIImage(named: "plus_photo")) {
+            photo = newPhoto
+        }
         viewModel.addPlant(
             name: nameTextField.text ?? "N/A",
             overview: overviewTextField.text ?? "N/A",
             wateringDate: datePicker.date,
-            photo: defaultImage)
+            photo: photo)
         router.pop(animated: true)
     }
 
@@ -158,6 +161,7 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
+
 }
 
 extension AddPlantViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {

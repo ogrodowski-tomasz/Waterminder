@@ -27,6 +27,7 @@
 		1E7E7AEB29927A38004E7167 /* EditPlantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AEA29927A38004E7167 /* EditPlantViewModel.swift */; };
 		1E7E7AEE29928AB4004E7167 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AED29928AB4004E7167 /* Date+Extensions.swift */; };
 		1E7E7AF02992B1A7004E7167 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AEF2992B1A7004E7167 /* UIViewController+Extensions.swift */; };
+		1E7E7AF22992D81B004E7167 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AF12992D81B004E7167 /* UIImage+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		1E7E7AEA29927A38004E7167 /* EditPlantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewModel.swift; sourceTree = "<group>"; };
 		1E7E7AED29928AB4004E7167 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		1E7E7AEF2992B1A7004E7167 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		1E7E7AF12992D81B004E7167 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 			children = (
 				1E7E7AED29928AB4004E7167 /* Date+Extensions.swift */,
 				1E7E7AEF2992B1A7004E7167 /* UIViewController+Extensions.swift */,
+				1E7E7AF12992D81B004E7167 /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				1E7E7AE729926E5E004E7167 /* PlantTableViewCell.swift in Sources */,
 				1E7E7ACF2991A2F9004E7167 /* PlantContainer.xcdatamodeld in Sources */,
 				1E7E7AE4299252F1004E7167 /* AppRouter.swift in Sources */,
+				1E7E7AF22992D81B004E7167 /* UIImage+Extensions.swift in Sources */,
 				1E7E7ADE29924D90004E7167 /* AddPlantViewModel.swift in Sources */,
 				1E7E7AD22991A35B004E7167 /* UIImageTransformer.swift in Sources */,
 			);
