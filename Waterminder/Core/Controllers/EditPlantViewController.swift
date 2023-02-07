@@ -28,35 +28,8 @@ class EditPlantViewController: UIViewController {
         return imageView
     }()
 
-    private let nameTextField: UITextField = {
-        let txtField = UITextField()
-        txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.layer.borderWidth = 1
-        txtField.layer.borderColor = UIColor.theme.shamrockGreen?.cgColor
-        txtField.layer.cornerRadius = 5
-        txtField.layer.masksToBounds = true
-        txtField.attributedPlaceholder = NSAttributedString(string: "Plant's name", attributes: [.foregroundColor : UIColor.theme.shamrockGreen?.withAlphaComponent(0.5) as Any])
-        txtField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-        txtField.leftViewMode = .always
-        txtField.textColor = UIColor.theme.shamrockGreen
-        txtField.returnKeyType = .next
-        return txtField
-    }()
-
-    private let overviewTextField: UITextField = {
-        let txtField = UITextField()
-        txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.layer.borderWidth = 1
-        txtField.layer.borderColor = UIColor.theme.shamrockGreen?.cgColor
-        txtField.layer.cornerRadius = 5
-        txtField.layer.masksToBounds = true
-        txtField.attributedPlaceholder = NSAttributedString(string: "Plant's overview", attributes: [.foregroundColor : UIColor.theme.shamrockGreen?.withAlphaComponent(0.5) as Any])
-        txtField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-        txtField.leftViewMode = .always
-        txtField.textColor = UIColor.theme.shamrockGreen
-        txtField.returnKeyType = .done
-        return txtField
-    }()
+    private var nameTextField = UITextField()
+    private var overviewTextField = UITextField()
 
     private let datePickerLabel: UILabel = {
         let label = UILabel()
@@ -116,11 +89,8 @@ class EditPlantViewController: UIViewController {
         navigationItem.setRightBarButton(saveBarButton(target: self, action: #selector(handleSave)), animated: true)
 
         customSheetView = customSheetView(backgroundColor: UIColor.theme.night)
-
-        nameTextField.text = viewModel.initialName
-        nameTextField.delegate = self
-        overviewTextField.text = viewModel.initialOverview
-        overviewTextField.delegate = self
+        nameTextField = customTextField(placeholderText: "Plant's Name...", tintColor: UIColor.theme.shamrockGreen, delegate: self, initialText: viewModel.initialName, returnKeyType: .next)
+        overviewTextField = customTextField(placeholderText: "Short description...", tintColor: UIColor.theme.shamrockGreen, delegate: self, initialText: viewModel.initialOverview, returnKeyType: .done)
 
         datePicker.date = viewModel.initialWateringTime
 

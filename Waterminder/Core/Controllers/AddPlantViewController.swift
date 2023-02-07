@@ -14,15 +14,6 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
     private let viewModel: AnyAddPlantViewModel
     private let router: AnyRouter
 
-//    private let customSheetView: UIView = {
-//        let sheetView = UIView()
-//        sheetView.translatesAutoresizingMaskIntoConstraints = false
-//        sheetView.backgroundColor = UIColor.theme.shamrockGreen
-//        sheetView.layer.cornerRadius = 20
-//        sheetView.layer.masksToBounds = true
-//        return sheetView
-//    }()
-
     private var customSheetView = UIView()
 
     private let addPhotoButton: UIImageView = {
@@ -36,35 +27,9 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
         return imageView
     }()
 
-    private let nameTextField: UITextField = {
-        let txtField = UITextField()
-        txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.layer.borderWidth = 1
-        txtField.layer.borderColor = UIColor.theme.night?.cgColor
-        txtField.layer.cornerRadius = 5
-        txtField.layer.masksToBounds = true
-        txtField.attributedPlaceholder = NSAttributedString(string: "Plant's name", attributes: [.foregroundColor : UIColor.theme.night?.withAlphaComponent(0.5) as Any])
-        txtField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-        txtField.leftViewMode = .always
-        txtField.textColor = UIColor.theme.night
-        txtField.returnKeyType = .next
-        return txtField
-    }()
+    private var nameTextField = UITextField()
 
-    private let overviewTextField: UITextField = {
-        let txtField = UITextField()
-        txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.layer.borderWidth = 1
-        txtField.layer.borderColor = UIColor.theme.night?.cgColor
-        txtField.layer.cornerRadius = 5
-        txtField.layer.masksToBounds = true
-        txtField.attributedPlaceholder = NSAttributedString(string: "Plant's overview", attributes: [.foregroundColor : UIColor.theme.night?.withAlphaComponent(0.5) as Any])
-        txtField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-        txtField.leftViewMode = .always
-        txtField.textColor = UIColor.theme.night
-        txtField.returnKeyType = .done
-        return txtField
-    }()
+    private var overviewTextField = UITextField()
 
     private let datePickerLabel: UILabel = {
         let label = UILabel()
@@ -109,11 +74,11 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
     private func setup() {
         navigationItem.setLeftBarButton(dismissBarButton(target: self, action: #selector(handleDismissTap)), animated: true)
         navigationItem.setRightBarButton(saveBarButton(target: self, action: #selector(handleSaveTap)), animated: true)
-        
+
         customSheetView = customSheetView(backgroundColor: UIColor.theme.shamrockGreen)
 
-        nameTextField.delegate = self
-        overviewTextField.delegate = self
+        nameTextField = customTextField(placeholderText: "Plant's Name...", tintColor: UIColor.theme.night, delegate: self, initialText: nil, returnKeyType: .next)
+        overviewTextField = customTextField(placeholderText: "Short descripton...", tintColor: UIColor.theme.night, delegate: self, initialText: nil, returnKeyType: .done)
 
         let bgTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBgTap))
         view.addGestureRecognizer(bgTapGesture)

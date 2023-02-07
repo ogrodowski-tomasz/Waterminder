@@ -36,4 +36,21 @@ extension UIViewController {
         return sheetView
     }
 
+    func customTextField(placeholderText: String, tintColor: UIColor?, delegate: UITextFieldDelegate, initialText: String?, returnKeyType: UIReturnKeyType) -> UITextField {
+        let txtField = UITextField()
+        txtField.translatesAutoresizingMaskIntoConstraints = false
+        txtField.layer.borderWidth = 1
+        txtField.layer.borderColor = tintColor?.cgColor
+        txtField.layer.cornerRadius = 5
+        txtField.layer.masksToBounds = true
+        txtField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [.foregroundColor : tintColor?.withAlphaComponent(0.5) as Any])
+        txtField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        txtField.leftViewMode = .always
+        txtField.textColor = tintColor
+        txtField.returnKeyType = returnKeyType
+        txtField.delegate = delegate
+        txtField.text = initialText
+        return txtField
+    }
+
 }
