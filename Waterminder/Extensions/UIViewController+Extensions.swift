@@ -63,4 +63,25 @@ extension UIViewController {
         return label
     }
 
+    func customAddPhotoView(
+        tintColor: UIColor?,
+        initialImage: UIImage?,
+        renderingMode: UIImage.RenderingMode,
+        cornerRadius: CGFloat,
+        tapTarget: Any?,
+        tapAction: Selector?
+    ) -> UIImageView {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = initialImage?.withRenderingMode(renderingMode)
+        imageView.tintColor = tintColor
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = cornerRadius
+        imageView.layer.masksToBounds = true
+        let addPhotoTap = UITapGestureRecognizer(target: tapTarget, action: tapAction)
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(addPhotoTap)
+        return imageView
+    }
+
 }

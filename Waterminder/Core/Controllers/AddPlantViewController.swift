@@ -16,17 +16,7 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
 
     private var customSheetView = UIView()
 
-    private let addPhotoButton: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "plus_photo")?.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor.theme.shamrockGreen
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = AddPlantViewController.addPhotoButtonHeight / 2
-        imageView.layer.masksToBounds = true
-        return imageView
-    }()
-
+    private var addPhotoView = UIImageView()
     private var nameTextField = UITextField()
     private var overviewTextField = UITextField()
     private var datePickerLabel: UILabel = UILabel()
@@ -67,20 +57,37 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
 
         customSheetView = customSheetView(backgroundColor: UIColor.theme.shamrockGreen)
 
-        nameTextField = customTextField(placeholderText: "Plant's Name...", tintColor: UIColor.theme.night, delegate: self, initialText: nil, returnKeyType: .next)
-        overviewTextField = customTextField(placeholderText: "Short descripton...", tintColor: UIColor.theme.night, delegate: self, initialText: nil, returnKeyType: .done)
-        datePickerLabel = customDatePickerLabel(textColor: UIColor.theme.night)
+        nameTextField = customTextField(
+            placeholderText: "Plant's Name...",
+            tintColor: UIColor.theme.night,
+            delegate: self,
+            initialText: nil,
+            returnKeyType: .next)
+
+        overviewTextField = customTextField(
+            placeholderText: "Short descripton...",
+            tintColor: UIColor.theme.night,
+            delegate: self,
+            initialText: nil,
+            returnKeyType: .done)
+
+        datePickerLabel = customDatePickerLabel(
+            textColor: UIColor.theme.night)
+
+        addPhotoView = customAddPhotoView(
+            tintColor: UIColor.theme.shamrockGreen,
+            initialImage: UIImage(named: "plus_photo"),
+            renderingMode: .alwaysTemplate,
+            cornerRadius: AddPlantViewController.addPhotoButtonHeight / 2,
+            tapTarget: self,
+            tapAction: #selector(handleAddPhotoTap))
 
         let bgTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBgTap))
         view.addGestureRecognizer(bgTapGesture)
-
-        let presentImagePickerGesture = UITapGestureRecognizer(target: self, action: #selector(handleAddPhotoTap))
-        addPhotoButton.isUserInteractionEnabled = true
-        addPhotoButton.addGestureRecognizer(presentImagePickerGesture)
     }
 
     private func layout() {
-        view.addSubview(addPhotoButton)
+        view.addSubview(addPhotoView)
         view.addSubview(customSheetView)
         customSheetView.addSubview(nameTextField)
         customSheetView.addSubview(overviewTextField)
@@ -88,10 +95,10 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
         customSheetView.addSubview(datePicker)
 
         NSLayoutConstraint.activate([
-            addPhotoButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 5),
-            addPhotoButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            addPhotoButton.widthAnchor.constraint(equalToConstant: AddPlantViewController.addPhotoButtonHeight),
-            addPhotoButton.heightAnchor.constraint(equalToConstant: AddPlantViewController.addPhotoButtonHeight),
+            addPhotoView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 5),
+            addPhotoView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            addPhotoView.widthAnchor.constraint(equalToConstant: AddPlantViewController.addPhotoButtonHeight),
+            addPhotoView.heightAnchor.constraint(equalToConstant: AddPlantViewController.addPhotoButtonHeight),
 
             customSheetView.topAnchor.constraint(equalToSystemSpacingBelow: view.centerYAnchor, multiplier: 0),
             customSheetView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 0),
@@ -137,7 +144,7 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
 
     @objc
     private func handleSaveTap() {
-        guard let defaultImage = addPhotoButton.image else { return }
+        guard let defaultImage = addPhotoView.image else { return }
         viewModel.addPlant(
             name: nameTextField.text ?? "N/A",
             overview: overviewTextField.text ?? "N/A",
@@ -176,7 +183,7 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
 extension AddPlantViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            addPhotoButton.image = pickedImage
+            addPhotoView.image = pickedImage
         } else {
             print("DEBUG: Couldnt parse image")
         }

@@ -16,30 +16,10 @@ class EditPlantViewController: UIViewController {
     private let router: AnyRouter
 
     private var customSheetView = UIView()
-
-    private let addPhotoButton: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "plus_photo")?.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = UIColor.theme.night
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = EditPlantViewController.imageSide / 2
-        imageView.layer.masksToBounds = true
-        return imageView
-    }()
-
+    private var addPhotoView = UIImageView()
     private var nameTextField = UITextField()
     private var overviewTextField = UITextField()
     private var datePickerLabel = UILabel()
-//    private let datePickerLabel: UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "Watering date: "
-//        label.textColor = UIColor.theme.shamrockGreen
-//        label.textAlignment = .left
-//        label.font = UIFont.systemFont(ofSize: 15)
-//        return label
-//    }()
 
     private let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -70,8 +50,6 @@ class EditPlantViewController: UIViewController {
         view.backgroundColor = UIColor.theme.shamrockGreen
         setup()
         layout()
-
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -88,18 +66,35 @@ class EditPlantViewController: UIViewController {
         navigationItem.setLeftBarButton(dismissBarButton(target: self, action: #selector(handleDismiss)), animated: true)
         navigationItem.setRightBarButton(saveBarButton(target: self, action: #selector(handleSave)), animated: true)
 
-        customSheetView = customSheetView(backgroundColor: UIColor.theme.night)
-        nameTextField = customTextField(placeholderText: "Plant's Name...", tintColor: UIColor.theme.shamrockGreen, delegate: self, initialText: viewModel.initialName, returnKeyType: .next)
-        overviewTextField = customTextField(placeholderText: "Short description...", tintColor: UIColor.theme.shamrockGreen, delegate: self, initialText: viewModel.initialOverview, returnKeyType: .done)
-        datePickerLabel = customDatePickerLabel(textColor: UIColor.theme.shamrockGreen)
+        customSheetView = customSheetView(
+            backgroundColor: UIColor.theme.night)
+
+        nameTextField = customTextField(
+            placeholderText: "Plant's Name...",
+            tintColor: UIColor.theme.shamrockGreen,
+            delegate: self,
+            initialText: viewModel.initialName,
+            returnKeyType: .next)
+
+        overviewTextField = customTextField(
+            placeholderText: "Short description...",
+            tintColor: UIColor.theme.shamrockGreen,
+            delegate: self,
+            initialText: viewModel.initialOverview,
+            returnKeyType: .done)
+
+        datePickerLabel = customDatePickerLabel(
+            textColor: UIColor.theme.shamrockGreen)
+
+        addPhotoView = customAddPhotoView(
+            tintColor: nil,
+            initialImage: viewModel.initialPhoto,
+            renderingMode: .alwaysOriginal,
+            cornerRadius: EditPlantViewController.imageSide / 2,
+            tapTarget: self,
+            tapAction: #selector(handleAddPhotoTap))
 
         datePicker.date = viewModel.initialWateringTime
-
-        addPhotoButton.image = viewModel.initialPhoto
-        let addPhotoTap = UITapGestureRecognizer(target: self, action: #selector(handleAddPhotoTap))
-        addPhotoButton.addGestureRecognizer(addPhotoTap)
-        addPhotoButton.isUserInteractionEnabled = true
-
         let bgTap = UITapGestureRecognizer(target: self, action: #selector(handleBgTap))
         view.addGestureRecognizer(bgTap)
 
@@ -122,7 +117,7 @@ class EditPlantViewController: UIViewController {
         customSheetStack.distribution = .fillEqually
         customSheetView.addSubview(customSheetStack)
 
-        view.addSubview(addPhotoButton)
+        view.addSubview(addPhotoView)
 
         NSLayoutConstraint.activate([
             customSheetView.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 0),
@@ -135,10 +130,10 @@ class EditPlantViewController: UIViewController {
             customSheetView.trailingAnchor.constraint(equalToSystemSpacingAfter: customSheetStack.trailingAnchor, multiplier: 1),
             customSheetView.bottomAnchor.constraint(equalToSystemSpacingBelow: customSheetStack.bottomAnchor, multiplier: 5),
 
-            addPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            addPhotoButton.widthAnchor.constraint(equalToConstant: Self.imageSide),
-            addPhotoButton.topAnchor.constraint(equalToSystemSpacingBelow: customSheetView.bottomAnchor, multiplier: 5),
-            addPhotoButton.heightAnchor.constraint(equalToConstant: Self.imageSide),
+            addPhotoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            addPhotoView.widthAnchor.constraint(equalToConstant: Self.imageSide),
+            addPhotoView.topAnchor.constraint(equalToSystemSpacingBelow: customSheetView.bottomAnchor, multiplier: 5),
+            addPhotoView.heightAnchor.constraint(equalToConstant: Self.imageSide),
         ])
     }
 
@@ -157,7 +152,7 @@ class EditPlantViewController: UIViewController {
     private func handleSave() {
         guard let newName = nameTextField.text else { return }
         guard let newOverview = overviewTextField.text else { return }
-        guard let newPhoto = addPhotoButton.image else { return }
+        guard let newPhoto = addPhotoView.image else { return }
         viewModel.updatePlant(newName: newName, newOverview: newOverview, newWateringDate: datePicker.date, newPhoto: newPhoto)
         router.pop(animated: true)
     }
@@ -182,7 +177,7 @@ class EditPlantViewController: UIViewController {
 extension EditPlantViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            addPhotoButton.image = pickedImage
+            addPhotoView.image = pickedImage
         } else {
             print("DEBUG: Couldnt parse image")
         }
