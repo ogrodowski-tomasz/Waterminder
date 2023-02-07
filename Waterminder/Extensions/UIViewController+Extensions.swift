@@ -7,6 +7,8 @@
 
 import UIKit
 
+typealias UIImagePickerDelegatable = UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate
+
 extension UIViewController {
 
     func dismissBarButton(target: AnyObject?, action: Selector?) -> UIBarButtonItem {
@@ -82,6 +84,46 @@ extension UIViewController {
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(addPhotoTap)
         return imageView
+    }
+
+    func customDatePicker(
+        tintColor: UIColor?,
+        backgroundColor: UIColor?,
+        contentHorizontalAlignment: UIControl.ContentHorizontalAlignment = .trailing,
+        initialDate: Date? = nil
+    ) -> UIDatePicker {
+        let picker = UIDatePicker()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.datePickerMode = .time
+        picker.backgroundColor = backgroundColor
+        picker.tintColor = tintColor
+        picker.layer.borderColor = tintColor?.cgColor
+        picker.layer.borderWidth = 1
+        picker.layer.cornerRadius = 5
+        picker.layer.masksToBounds = true
+        picker.contentHorizontalAlignment = contentHorizontalAlignment
+        if let initialDate {
+            picker.date = initialDate
+        }
+        return picker
+    }
+
+    func photoPickerActionSheet(router: AnyRouter, delegate: UIImagePickerDelegatable) -> UIAlertController {
+        let actionSheet = UIAlertController(title: "Source", message: "How do you want to add photo!", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            router.navigateTo(route: .imagePicker(sourceType: .camera, delegate: delegate), animated: true)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { _ in
+            router.navigateTo(route: .imagePicker(sourceType: .library, delegate: delegate), animated: true)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        return actionSheet
+    }
+
+    func resignTextFields(_ textFields: [UITextField]) {
+        textFields.forEach { txtField in
+            txtField.resignFirstResponder()
+        }
     }
 
 }

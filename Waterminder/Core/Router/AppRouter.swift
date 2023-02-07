@@ -21,15 +21,21 @@ enum AppRoutes {
 protocol AnyRouter {
     var navigationController: UINavigationController { get set }
     func navigateTo(route: AppRoutes, animated: Bool)
+    func present(_ vc: UIViewController)
     func dismiss(animated: Bool)
     func pop(animated: Bool)
 }
 
 class AppRouter: AnyRouter {
+
     var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+    }
+
+    func present(_ vc: UIViewController) {
+        navigationController.present(vc, animated: true)
     }
 
     func navigateTo(route: AppRoutes, animated: Bool = true) {
@@ -50,11 +56,13 @@ class AppRouter: AnyRouter {
                 imagePickerController.sourceType = .photoLibrary
             }
             vc = imagePickerController
-            navigationController.present(vc, animated: true)
+            present(vc)
             return
         }
         navigationController.pushViewController(vc, animated: true)
     }
+
+
 
     func dismiss(animated: Bool = true) {
         navigationController.dismiss(animated: animated)

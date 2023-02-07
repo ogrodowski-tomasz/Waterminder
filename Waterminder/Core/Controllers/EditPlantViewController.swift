@@ -20,19 +20,19 @@ class EditPlantViewController: UIViewController {
     private var nameTextField = UITextField()
     private var overviewTextField = UITextField()
     private var datePickerLabel = UILabel()
-
-    private let datePicker: UIDatePicker = {
-        let picker = UIDatePicker()
-        picker.translatesAutoresizingMaskIntoConstraints = false
-        picker.datePickerMode = .time
-        picker.backgroundColor = UIColor.theme.shamrockGreen
-        picker.layer.borderColor = UIColor.theme.shamrockGreen?.cgColor
-        picker.layer.borderWidth = 1
-        picker.layer.cornerRadius = 5
-        picker.layer.masksToBounds = true
-        picker.contentHorizontalAlignment = .center
-        return picker
-    }()
+    private var datePicker = UIDatePicker()
+//    private let datePicker: UIDatePicker = {
+//        let picker = UIDatePicker()
+//        picker.translatesAutoresizingMaskIntoConstraints = false
+//        picker.datePickerMode = .time
+//        picker.backgroundColor = UIColor.theme.shamrockGreen
+//        picker.layer.borderColor = UIColor.theme.shamrockGreen?.cgColor
+//        picker.layer.borderWidth = 1
+//        picker.layer.cornerRadius = 5
+//        picker.layer.masksToBounds = true
+//        picker.contentHorizontalAlignment = .center
+//        return picker
+//    }()
 
     init(viewModel: AnyEditPlantViewModel, router: AnyRouter) {
         self.viewModel = viewModel
@@ -63,8 +63,15 @@ class EditPlantViewController: UIViewController {
     }
 
     private func setup() {
-        navigationItem.setLeftBarButton(dismissBarButton(target: self, action: #selector(handleDismiss)), animated: true)
-        navigationItem.setRightBarButton(saveBarButton(target: self, action: #selector(handleSave)), animated: true)
+        navigationItem.setLeftBarButton(dismissBarButton(
+            target: self,
+            action: #selector(handleDismiss)
+        ), animated: true)
+
+        navigationItem.setRightBarButton(saveBarButton(
+            target: self,
+            action: #selector(handleSave)
+        ), animated: true)
 
         customSheetView = customSheetView(
             backgroundColor: UIColor.theme.night)
@@ -94,11 +101,13 @@ class EditPlantViewController: UIViewController {
             tapTarget: self,
             tapAction: #selector(handleAddPhotoTap))
 
-        datePicker.date = viewModel.initialWateringTime
+        datePicker = customDatePicker(
+            tintColor: UIColor.theme.shamrockGreen,
+            backgroundColor: UIColor.theme.night,
+            initialDate: viewModel.initialWateringTime)
+
         let bgTap = UITapGestureRecognizer(target: self, action: #selector(handleBgTap))
         view.addGestureRecognizer(bgTap)
-
-
     }
 
     private func layout() {
@@ -139,8 +148,7 @@ class EditPlantViewController: UIViewController {
 
     @objc
     private func handleBgTap() {
-        nameTextField.resignFirstResponder()
-        overviewTextField.resignFirstResponder()
+        resignTextFields([nameTextField, overviewTextField])
     }
 
     @objc
@@ -159,17 +167,9 @@ class EditPlantViewController: UIViewController {
 
     @objc
     private func handleAddPhotoTap() {
-        let actionSheet = UIAlertController(title: "Source", message: "How do you want to add photo!", preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
-            guard let self = self else { return }
-            self.router.navigateTo(route: .imagePicker(sourceType: .camera, delegate: self), animated: true)
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { [weak self] _ in
-            guard let self = self else { return }
-            self.router.navigateTo(route: .imagePicker(sourceType: .library, delegate: self), animated: true)
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        navigationController?.present(actionSheet, animated: true)
+        resignTextFields([nameTextField, overviewTextField])
+        let actionSheet = photoPickerActionSheet(router: router, delegate: self)
+        router.present(actionSheet)
     }
 
 }

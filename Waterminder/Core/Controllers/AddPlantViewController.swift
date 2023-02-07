@@ -20,18 +20,7 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
     private var nameTextField = UITextField()
     private var overviewTextField = UITextField()
     private var datePickerLabel: UILabel = UILabel()
-
-    private let datePicker: UIDatePicker = {
-        let picker = UIDatePicker()
-        picker.translatesAutoresizingMaskIntoConstraints = false
-        picker.datePickerMode = .time
-        picker.tintColor = UIColor.theme.night
-        picker.layer.borderColor = UIColor.theme.night?.cgColor
-        picker.layer.borderWidth = 1
-        picker.layer.cornerRadius = 5
-        picker.layer.masksToBounds = true
-        return picker
-    }()
+    private var datePicker = UIDatePicker()
 
     init(viewModel: AnyAddPlantViewModel, router: AnyRouter) {
         self.viewModel = viewModel
@@ -82,6 +71,10 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
             tapTarget: self,
             tapAction: #selector(handleAddPhotoTap))
 
+        datePicker = customDatePicker(
+            tintColor: UIColor.theme.night,
+            backgroundColor: UIColor.theme.shamrockGreen)
+
         let bgTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBgTap))
         view.addGestureRecognizer(bgTapGesture)
     }
@@ -91,8 +84,14 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(customSheetView)
         customSheetView.addSubview(nameTextField)
         customSheetView.addSubview(overviewTextField)
-        customSheetView.addSubview(datePickerLabel)
-        customSheetView.addSubview(datePicker)
+
+        let datePickerStack = UIStackView(arrangedSubviews: [datePickerLabel, datePicker])
+        datePickerStack.translatesAutoresizingMaskIntoConstraints = false
+        datePickerStack.axis = .horizontal
+        datePickerStack.spacing = 10
+        datePickerStack.alignment = .center
+        datePickerStack.distribution = .equalSpacing
+        view.addSubview(datePickerStack)
 
         NSLayoutConstraint.activate([
             addPhotoView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 5),
@@ -115,26 +114,16 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
             customSheetView.trailingAnchor.constraint(equalToSystemSpacingAfter: overviewTextField.trailingAnchor, multiplier: 2),
             overviewTextField.heightAnchor.constraint(equalToConstant: 60),
 
-            datePickerLabel.topAnchor.constraint(equalToSystemSpacingBelow: overviewTextField.bottomAnchor, multiplier: 1),
-            datePickerLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: customSheetView.leadingAnchor, multiplier: 2),
-            datePickerLabel.heightAnchor.constraint(equalToConstant: 50),
-            datePickerLabel.widthAnchor.constraint(equalToConstant: 150),
-
-            datePicker.widthAnchor.constraint(equalToConstant: 100),
-            customSheetView.trailingAnchor.constraint(equalToSystemSpacingAfter: datePicker.trailingAnchor, multiplier: 2),
-            datePicker.centerYAnchor.constraint(equalTo: datePickerLabel.centerYAnchor),
-
+            datePickerStack.topAnchor.constraint(equalToSystemSpacingBelow: overviewTextField.bottomAnchor, multiplier: 1),
+            datePickerStack.leadingAnchor.constraint(equalToSystemSpacingAfter: customSheetView.leadingAnchor, multiplier: 1),
+            customSheetView.trailingAnchor.constraint(equalToSystemSpacingAfter: datePickerStack.trailingAnchor, multiplier: 2),
+            datePickerStack.heightAnchor.constraint(equalToConstant: 60)
         ])
-    }
-
-    private func resignTextFields() {
-        nameTextField.resignFirstResponder()
-        overviewTextField.resignFirstResponder()
     }
 
     @objc
     private func handleBgTap() {
-        resignTextFields()
+        resignTextFields([nameTextField, overviewTextField])
     }
 
     @objc
@@ -155,18 +144,9 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
 
     @objc
     private func handleAddPhotoTap() {
-        resignTextFields()
-        let actionSheet = UIAlertController(title: "Source", message: "How do you want to add photo!", preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
-            guard let self = self else { return }
-            self.router.navigateTo(route: .imagePicker(sourceType: .camera, delegate: self), animated: true)
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { [weak self] _ in
-            guard let self = self else { return }
-            self.router.navigateTo(route: .imagePicker(sourceType: .library, delegate: self), animated: true)
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        navigationController?.present(actionSheet, animated: true)
+        resignTextFields([nameTextField, overviewTextField])
+        let actionSheet = photoPickerActionSheet(router: router, delegate: self)
+        router.present(actionSheet)
     }
 
 
