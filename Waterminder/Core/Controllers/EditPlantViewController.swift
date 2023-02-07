@@ -30,16 +30,16 @@ class EditPlantViewController: UIViewController {
 
     private var nameTextField = UITextField()
     private var overviewTextField = UITextField()
-
-    private let datePickerLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Watering date: "
-        label.textColor = UIColor.theme.shamrockGreen
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 15)
-        return label
-    }()
+    private var datePickerLabel = UILabel()
+//    private let datePickerLabel: UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = "Watering date: "
+//        label.textColor = UIColor.theme.shamrockGreen
+//        label.textAlignment = .left
+//        label.font = UIFont.systemFont(ofSize: 15)
+//        return label
+//    }()
 
     private let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -91,6 +91,7 @@ class EditPlantViewController: UIViewController {
         customSheetView = customSheetView(backgroundColor: UIColor.theme.night)
         nameTextField = customTextField(placeholderText: "Plant's Name...", tintColor: UIColor.theme.shamrockGreen, delegate: self, initialText: viewModel.initialName, returnKeyType: .next)
         overviewTextField = customTextField(placeholderText: "Short description...", tintColor: UIColor.theme.shamrockGreen, delegate: self, initialText: viewModel.initialOverview, returnKeyType: .done)
+        datePickerLabel = customDatePickerLabel(textColor: UIColor.theme.shamrockGreen)
 
         datePicker.date = viewModel.initialWateringTime
 

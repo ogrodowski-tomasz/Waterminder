@@ -53,4 +53,14 @@ extension UIViewController {
         return txtField
     }
 
+    func customDatePickerLabel(textColor: UIColor?, fontSize: CGFloat = 15) -> UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Watering date: "
+        label.textColor = textColor
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: fontSize)
+        return label
+    }
+
 }

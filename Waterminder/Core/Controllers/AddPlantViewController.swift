@@ -28,18 +28,8 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
     }()
 
     private var nameTextField = UITextField()
-
     private var overviewTextField = UITextField()
-
-    private let datePickerLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Watering date: "
-        label.textColor = UIColor.theme.night
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 15)
-        return label
-    }()
+    private var datePickerLabel: UILabel = UILabel()
 
     private let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -79,6 +69,7 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
 
         nameTextField = customTextField(placeholderText: "Plant's Name...", tintColor: UIColor.theme.night, delegate: self, initialText: nil, returnKeyType: .next)
         overviewTextField = customTextField(placeholderText: "Short descripton...", tintColor: UIColor.theme.night, delegate: self, initialText: nil, returnKeyType: .done)
+        datePickerLabel = customDatePickerLabel(textColor: UIColor.theme.night)
 
         let bgTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBgTap))
         view.addGestureRecognizer(bgTapGesture)
