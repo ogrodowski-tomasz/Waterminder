@@ -11,7 +11,7 @@ class EditPlantViewController: UIViewController {
 
     static let imageSide: CGFloat = 250
 
-    let viewModel: AnyEditPlantViewModel
+    private let viewModel: AnyEditPlantViewModel
 
     private let router: AnyRouter
 

@@ -46,7 +46,7 @@ class EditPlantViewModel: AnyEditPlantViewModel {
 
     var initialName: String { plant.name }
 
-    var initialWateringTime: Date { Date.toDate(string: plant.wateringDate) }
+    var initialWateringTime: Date { Date.from(string: plant.wateringDate) }
 
     var initialOverview: String { plant.overview }
 

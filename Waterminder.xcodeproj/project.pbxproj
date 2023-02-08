@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E0B5CBD2993B476009BE44B /* UIImageExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B5CBC2993B476009BE44B /* UIImageExtensionsTests.swift */; };
+		1E0B5CBF2993B610009BE44B /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B5CBE2993B610009BE44B /* DateExtensions.swift */; };
 		1E5A3AFF299165B200E4A750 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3AFE299165B200E4A750 /* AppDelegate.swift */; };
 		1E5A3B03299165B200E4A750 /* PlantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3B02299165B200E4A750 /* PlantListViewController.swift */; };
 		1E5A3B08299165B300E4A750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E5A3B07299165B300E4A750 /* Assets.xcassets */; };
@@ -32,7 +34,20 @@
 		1EDB1C422993A76D005A1CF3 /* NSManagedObjectID+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB1C412993A76D005A1CF3 /* NSManagedObjectID+Extensions.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1E0B5CB62993B450009BE44B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E5A3AF3299165B200E4A750 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E5A3AFA299165B200E4A750;
+			remoteInfo = Waterminder;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1E0B5CB22993B450009BE44B /* WaterminderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterminderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E0B5CBC2993B476009BE44B /* UIImageExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensionsTests.swift; sourceTree = "<group>"; };
+		1E0B5CBE2993B610009BE44B /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		1E5A3AFB299165B200E4A750 /* Waterminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waterminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E5A3AFE299165B200E4A750 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E5A3B02299165B200E4A750 /* PlantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantListViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +76,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1E0B5CAF2993B450009BE44B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1E5A3AF8299165B200E4A750 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -71,10 +93,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E0B5CAB2993B3D7009BE44B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1E7E7AD02991A34B004E7167 /* CoreDataManagment */,
+				1E7E7AD72991A93F004E7167 /* Services */,
+				1E5A3B12299166A500E4A750 /* ColorTheme.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		1E0B5CB32993B450009BE44B /* WaterminderTests */ = {
+			isa = PBXGroup;
+			children = (
+				1E0B5CBB2993B459009BE44B /* ExtensionsTests */,
+			);
+			path = WaterminderTests;
+			sourceTree = "<group>";
+		};
+		1E0B5CBB2993B459009BE44B /* ExtensionsTests */ = {
+			isa = PBXGroup;
+			children = (
+				1E0B5CBC2993B476009BE44B /* UIImageExtensionsTests.swift */,
+				1E0B5CBE2993B610009BE44B /* DateExtensions.swift */,
+			);
+			path = ExtensionsTests;
+			sourceTree = "<group>";
+		};
 		1E5A3AF2299165B200E4A750 = {
 			isa = PBXGroup;
 			children = (
 				1E5A3AFD299165B200E4A750 /* Waterminder */,
+				1E0B5CB32993B450009BE44B /* WaterminderTests */,
 				1E5A3AFC299165B200E4A750 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				1E5A3AFB299165B200E4A750 /* Waterminder.app */,
+				1E0B5CB22993B450009BE44B /* WaterminderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,15 +141,13 @@
 		1E5A3AFD299165B200E4A750 /* Waterminder */ = {
 			isa = PBXGroup;
 			children = (
+				1E0B5CAB2993B3D7009BE44B /* Utils */,
 				1E7E7AEC29928AAE004E7167 /* Extensions */,
-				1E7E7AD72991A93F004E7167 /* Services */,
-				1E7E7AD02991A34B004E7167 /* CoreDataManagment */,
 				1E5A3B1D2991712C00E4A750 /* Core */,
 				1E5A3AFE299165B200E4A750 /* AppDelegate.swift */,
 				1E5A3B07299165B300E4A750 /* Assets.xcassets */,
 				1E5A3B09299165B300E4A750 /* LaunchScreen.storyboard */,
 				1E5A3B0C299165B300E4A750 /* Info.plist */,
-				1E5A3B12299166A500E4A750 /* ColorTheme.swift */,
 			);
 			path = Waterminder;
 			sourceTree = "<group>";
@@ -193,6 +242,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1E0B5CB12993B450009BE44B /* WaterminderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E0B5CB82993B450009BE44B /* Build configuration list for PBXNativeTarget "WaterminderTests" */;
+			buildPhases = (
+				1E0B5CAE2993B450009BE44B /* Sources */,
+				1E0B5CAF2993B450009BE44B /* Frameworks */,
+				1E0B5CB02993B450009BE44B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E0B5CB72993B450009BE44B /* PBXTargetDependency */,
+			);
+			name = WaterminderTests;
+			productName = WaterminderTests;
+			productReference = 1E0B5CB22993B450009BE44B /* WaterminderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		1E5A3AFA299165B200E4A750 /* Waterminder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E5A3B0F299165B300E4A750 /* Build configuration list for PBXNativeTarget "Waterminder" */;
@@ -220,6 +287,10 @@
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					1E0B5CB12993B450009BE44B = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 1E5A3AFA299165B200E4A750;
+					};
 					1E5A3AFA299165B200E4A750 = {
 						CreatedOnToolsVersion = 14.0;
 					};
@@ -239,11 +310,19 @@
 			projectRoot = "";
 			targets = (
 				1E5A3AFA299165B200E4A750 /* Waterminder */,
+				1E0B5CB12993B450009BE44B /* WaterminderTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1E0B5CB02993B450009BE44B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1E5A3AF9299165B200E4A750 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,6 +335,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1E0B5CAE2993B450009BE44B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E0B5CBD2993B476009BE44B /* UIImageExtensionsTests.swift in Sources */,
+				1E0B5CBF2993B610009BE44B /* DateExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1E5A3AF7299165B200E4A750 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -286,6 +374,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		1E0B5CB72993B450009BE44B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E5A3AFA299165B200E4A750 /* Waterminder */;
+			targetProxy = 1E0B5CB62993B450009BE44B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		1E5A3B09299165B300E4A750 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -298,6 +394,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1E0B5CB92993B450009BE44B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FU45F4SL37;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ogrodowskitomasz.WaterminderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Waterminder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Waterminder";
+			};
+			name = Debug;
+		};
+		1E0B5CBA2993B450009BE44B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FU45F4SL37;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ogrodowskitomasz.WaterminderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Waterminder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Waterminder";
+			};
+			name = Release;
+		};
 		1E5A3B0D299165B300E4A750 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -475,6 +607,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1E0B5CB82993B450009BE44B /* Build configuration list for PBXNativeTarget "WaterminderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E0B5CB92993B450009BE44B /* Debug */,
+				1E0B5CBA2993B450009BE44B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1E5A3AF6299165B200E4A750 /* Build configuration list for PBXProject "Waterminder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
