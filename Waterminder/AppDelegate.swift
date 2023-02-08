@@ -20,11 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
 
-
+        let userNotificationsService: AnyUserNotificationsService = UserNotificationsService()
         let navigationController = UINavigationController()
         let router: AnyRouter = AppRouter(navigationController: navigationController)
         let plantListVC = PlantListViewController(
-            plantListViewModel: PlantListViewModel(plantService: PlantService()),
+            plantListViewModel: PlantListViewModel(
+                plantService: PlantService(),
+                notificationsService: userNotificationsService),
             router: router)
         navigationController.viewControllers = [plantListVC]
 

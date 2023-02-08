@@ -12,7 +12,7 @@ protocol AnyPlantService {
     var delegate: AnyPlantServiceDelegate? { get set }
     var fetchedPlantsController: NSFetchedResultsController<Plant> { get }
     func getPlants()
-    func addPlant(name: String, overview: String, wateringDate: Date, photo: UIImage)
+    func addPlant(name: String, overview: String, wateringDate: Date, photo: UIImage) -> NSManagedObjectID
     func removePlant(id: NSManagedObjectID)
     func updatePlant(id: NSManagedObjectID, newName: String, newOverview: String, newWateringDate: Date, newPhoto: UIImage)
 }
@@ -53,17 +53,21 @@ class PlantService: NSObject, AnyPlantService {
         }
     }
 
-    func addPlant(name: String, overview: String, wateringDate: Date, photo: UIImage) {
+    func addPlant(name: String, overview: String, wateringDate: Date, photo: UIImage) -> NSManagedObjectID {
         let newPlant = Plant(context: coreDataStack.viewContext)
         newPlant.name = name
         newPlant.overview = overview
         newPlant.wateringDate = wateringDate
         newPlant.photo = photo
         coreDataStack.saveContext()
+        return newPlant.objectID
     }
 
     func removePlant(id: NSManagedObjectID) {
-
+        if let plant = Plant.byId(id, context: coreDataStack.viewContext) {
+            coreDataStack.viewContext.delete(plant)
+            coreDataStack.saveContext()
+        }
     }
 
     func updatePlant(id: NSManagedObjectID, newName: String, newOverview: String, newWateringDate: Date, newPhoto: UIImage) {

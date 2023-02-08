@@ -33,7 +33,10 @@ class PlantListViewController: UIViewController {
         return tableView
     }()
 
-    init(plantListViewModel: AnyPlantListViewModel, router: AnyRouter) {
+    init(
+        plantListViewModel: AnyPlantListViewModel,
+        router: AnyRouter
+    ) {
         self.plantListViewModel = plantListViewModel
         self.router = router
         super.init(nibName: nil, bundle: nil)
@@ -96,26 +99,28 @@ class PlantListViewController: UIViewController {
 
     @objc
     private func handleAddNewProjectTap() {
-        print("DEBUG: Present Add new plant sheet")
-        let addPlantVM = AddPlantViewModel(plantService: plantListViewModel.plantService)
+        let addPlantVM = AddPlantViewModel(
+            plantService: plantListViewModel.plantService,
+            notificationsService: plantListViewModel.notificationsService
+        )
         router.navigateTo(route: .addNewPlant(viewModel: addPlantVM), animated: true)
-        
     }
-
-
 
 }
 
-
 extension PlantListViewController: AnyPlantViewModelDelegate {
     func didReceivePlants() {
-        // should reload tableView
-        print("DEBUG: should reload data")
         plantsTableView.reloadData()
     }
 
     func didReceiveError(error: Error) {
+        let alert = UIAlertController(title: "Error", message: "Something went wrong", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
+            self?.plantListViewModel.getPlants()
+        }))
 
+        router.present(alert)
     }
 
 }
@@ -142,11 +147,19 @@ extension PlantListViewController: UITableViewDelegate, UITableViewDataSource {
             route: .editPlant(
                 viewModel: EditPlantViewModel(
                     plantService: plantListViewModel.plantService,
+                    notificationsService: plantListViewModel.notificationsService,
                     plant: plantListViewModel.plants[indexPath.row]
                 )
             ),
             animated: true)
-        
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] action, uiView, handler in
+            self?.plantListViewModel.removePlant(at: indexPath.row)
+            handler(true)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 
 }

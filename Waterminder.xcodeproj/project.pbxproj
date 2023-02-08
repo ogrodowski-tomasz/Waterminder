@@ -28,6 +28,8 @@
 		1E7E7AEE29928AB4004E7167 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AED29928AB4004E7167 /* Date+Extensions.swift */; };
 		1E7E7AF02992B1A7004E7167 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AEF2992B1A7004E7167 /* UIViewController+Extensions.swift */; };
 		1E7E7AF22992D81B004E7167 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AF12992D81B004E7167 /* UIImage+Extensions.swift */; };
+		1EDB1C402993A474005A1CF3 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB1C3F2993A474005A1CF3 /* NotificationService.swift */; };
+		1EDB1C422993A76D005A1CF3 /* NSManagedObjectID+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDB1C412993A76D005A1CF3 /* NSManagedObjectID+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		1E7E7AED29928AB4004E7167 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		1E7E7AEF2992B1A7004E7167 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1E7E7AF12992D81B004E7167 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		1EDB1C3F2993A474005A1CF3 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		1EDB1C412993A76D005A1CF3 /* NSManagedObjectID+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectID+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				1E7E7AD82991A947004E7167 /* PlantService.swift */,
+				1EDB1C3F2993A474005A1CF3 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 				1E7E7AED29928AB4004E7167 /* Date+Extensions.swift */,
 				1E7E7AEF2992B1A7004E7167 /* UIViewController+Extensions.swift */,
 				1E7E7AF12992D81B004E7167 /* UIImage+Extensions.swift */,
+				1EDB1C412993A76D005A1CF3 /* NSManagedObjectID+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -262,6 +268,8 @@
 				1E7E7AEB29927A38004E7167 /* EditPlantViewModel.swift in Sources */,
 				1E7E7ACC2991A195004E7167 /* PlantModel.swift in Sources */,
 				1E7E7ADC2991B005004E7167 /* PlantListViewModel.swift in Sources */,
+				1EDB1C402993A474005A1CF3 /* NotificationService.swift in Sources */,
+				1EDB1C422993A76D005A1CF3 /* NSManagedObjectID+Extensions.swift in Sources */,
 				1E7E7AE129924F0F004E7167 /* AddPlantViewController.swift in Sources */,
 				1E7E7AD92991A947004E7167 /* PlantService.swift in Sources */,
 				1E7E7AE929927A1E004E7167 /* EditPlantViewController.swift in Sources */,
