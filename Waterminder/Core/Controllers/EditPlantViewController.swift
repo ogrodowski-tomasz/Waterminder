@@ -38,6 +38,7 @@ class EditPlantViewController: UIViewController {
         view.backgroundColor = UIColor.theme.shamrockGreen
         setup()
         layout()
+        overrideUserInterfaceStyle = .dark
     }
 
     override func viewWillAppear(_ animated: Bool) {
