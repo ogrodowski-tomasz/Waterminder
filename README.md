@@ -5,7 +5,8 @@
 </p>
 <p align="center">   
   A reminder to water Your favorite plants!
- 
+<b>
+
  Stack:
   
   - [x] Swift
@@ -15,8 +16,10 @@
   - [x] MVVM
   - [x] Programmatic layout
   - [x] UIImagePickerController (Camera and library)
+</b>
+Flow is designed with <b>Delegates</b>.
 
-Flow is designed with Delegates.
+Whole code is also <b>swiftlited</b>
 </p>
 
 ## Screenshots
