@@ -41,12 +41,10 @@ struct UserNotificationsService: AnyUserNotificationsService {
 
         let request = UNNotificationRequest(identifier: stringId, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
-        print("DEBUG: New notificaition set at time: [\(dateComponents.description.uppercased())] with id: [\(stringId)]")
     }
 
     func removeNotification(id: NSManagedObjectID) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id.toString])
-        print("DEBUG: Removed notification with id: [\(id.toString)]")
     }
 
     func updateNotification(id: NSManagedObjectID, newTitle: String, newTriggerDate: Date) {
@@ -54,5 +52,3 @@ struct UserNotificationsService: AnyUserNotificationsService {
         scheduleNotification(id: id, title: newTitle, triggerDate: newTriggerDate)
     }
 }
-
-

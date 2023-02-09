@@ -16,5 +16,3 @@ struct PlantModel {
     var photo: UIImage { plant.photo ?? UIImage(systemName: "questionmark.diamond.fill")! }
     var wateringDate: String { (plant.wateringDate ?? Date()).toString }
 }
-
-

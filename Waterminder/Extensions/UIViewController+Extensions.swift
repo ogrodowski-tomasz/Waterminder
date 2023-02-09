@@ -11,7 +11,10 @@ typealias UIImagePickerDelegatable = UIViewController & UINavigationControllerDe
 
 extension UIViewController {
 
-    func dismissBarButton(target: AnyObject?, action: Selector?) -> UIBarButtonItem {
+    func dismissBarButton(
+        target: AnyObject?,
+        action: Selector?
+    ) -> UIBarButtonItem {
         let button = UIBarButtonItem()
         button.tintColor = .systemRed
         button.title = "Dismiss"
@@ -20,7 +23,10 @@ extension UIViewController {
         return button
     }
 
-    func saveBarButton(target: AnyObject?, action: Selector?) -> UIBarButtonItem {
+    func saveBarButton(
+        target: AnyObject?,
+        action: Selector?
+    ) -> UIBarButtonItem {
         let button = UIBarButtonItem()
         button.tintColor = .systemGreen
         button.title = "✓ Save"
@@ -29,7 +35,9 @@ extension UIViewController {
         return button
     }
 
-    func customSheetView(backgroundColor: UIColor?) -> UIView {
+    func customSheetView(
+        backgroundColor: UIColor?
+    ) -> UIView {
         let sheetView = UIView()
         sheetView.translatesAutoresizingMaskIntoConstraints = false
         sheetView.backgroundColor = backgroundColor
@@ -38,14 +46,25 @@ extension UIViewController {
         return sheetView
     }
 
-    func customTextField(placeholderText: String, tintColor: UIColor?, delegate: UITextFieldDelegate, initialText: String?, returnKeyType: UIReturnKeyType) -> UITextField {
+    func customTextField(
+        placeholderText: String,
+        tintColor: UIColor?,
+        delegate: UITextFieldDelegate,
+        initialText: String?,
+        returnKeyType: UIReturnKeyType
+    ) -> UITextField {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
         txtField.layer.borderWidth = 1
         txtField.layer.borderColor = tintColor?.cgColor
         txtField.layer.cornerRadius = 5
         txtField.layer.masksToBounds = true
-        txtField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [.foregroundColor : tintColor?.withAlphaComponent(0.5) as Any])
+        txtField.attributedPlaceholder = NSAttributedString(
+            string: placeholderText,
+            attributes: [
+                .foregroundColor: tintColor?.withAlphaComponent(0.5) as Any
+            ]
+        )
         txtField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         txtField.leftViewMode = .always
         txtField.textColor = tintColor
@@ -55,7 +74,10 @@ extension UIViewController {
         return txtField
     }
 
-    func customDatePickerLabel(textColor: UIColor?, fontSize: CGFloat = 15) -> UILabel {
+    func customDatePickerLabel(
+        textColor: UIColor?,
+        fontSize: CGFloat = 15
+    ) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Watering date: "
@@ -65,6 +87,7 @@ extension UIViewController {
         return label
     }
 
+    // swiftlint:disable:next function_parameter_count
     func customAddPhotoView(
         tintColor: UIColor?,
         initialImage: UIImage?,
@@ -108,19 +131,43 @@ extension UIViewController {
         return picker
     }
 
-    func photoPickerActionSheet(router: AnyRouter, delegate: UIImagePickerDelegatable) -> UIAlertController {
-        let actionSheet = UIAlertController(title: "Source", message: "How do you want to add photo!", preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+    func photoPickerActionSheet(
+        router: AnyRouter,
+        delegate: UIImagePickerDelegatable
+    ) -> UIAlertController {
+        let actionSheet = UIAlertController(
+            title: "Source",
+            message: "How do you want to add photo!",
+            preferredStyle: .actionSheet
+        )
+
+        actionSheet.addAction(
+            UIAlertAction(
+                title: "Camera",
+                style: .default,
+                handler: { _ in
             router.navigateTo(route: .imagePicker(sourceType: .camera, delegate: delegate), animated: true)
         }))
-        actionSheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { _ in
+
+        actionSheet.addAction(
+            UIAlertAction(
+                title: "Library",
+                style: .default,
+                handler: { _ in
             router.navigateTo(route: .imagePicker(sourceType: .library, delegate: delegate), animated: true)
         }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        actionSheet.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: .cancel
+            )
+        )
         return actionSheet
     }
 
-    func resignTextFields(_ textFields: [UITextField]) {
+    func resignTextFields(
+        _ textFields: [UITextField]
+    ) {
         textFields.forEach { txtField in
             txtField.resignFirstResponder()
         }

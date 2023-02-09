@@ -22,6 +22,4 @@ class MockPlantServiceDelegate: AnyPlantServiceDelegate {
     func didReceiveError(error: Error) {
         errorReceived = true
     }
-
-
 }

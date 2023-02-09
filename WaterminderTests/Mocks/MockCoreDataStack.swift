@@ -16,12 +16,14 @@ class MockCoreDataStack {
     var context: NSManagedObjectContext { persistentContainer.viewContext }
 
     init() {
-        ValueTransformer.setValueTransformer(UIImageTransformer(), forName: NSValueTransformerName("UIImageTransformer"))
+        ValueTransformer.setValueTransformer(
+            UIImageTransformer(),
+            forName: NSValueTransformerName("UIImageTransformer"))
         persistentContainer = NSPersistentContainer(name: "PlantContainer")
         let description = persistentContainer.persistentStoreDescriptions.first
         description?.type = NSInMemoryStoreType
 
-        persistentContainer.loadPersistentStores { description, error in
+        persistentContainer.loadPersistentStores { _, error in
             if let error {
                 fatalError("Unable to load store! \(error)")
             }

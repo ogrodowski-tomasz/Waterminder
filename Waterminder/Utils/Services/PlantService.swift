@@ -14,7 +14,13 @@ protocol AnyPlantService {
     func getPlants()
     func addPlant(name: String, overview: String, wateringDate: Date, photo: UIImage) -> NSManagedObjectID?
     func removePlant(id: NSManagedObjectID) -> Bool
-    func updatePlant(id: NSManagedObjectID, newName: String, newOverview: String, newWateringDate: Date, newPhoto: UIImage) -> Plant?
+    func updatePlant(
+        id: NSManagedObjectID,
+        newName: String,
+        newOverview: String,
+        newWateringDate: Date,
+        newPhoto: UIImage
+    ) -> Plant?
 }
 
 protocol AnyPlantServiceDelegate: AnyObject {
@@ -83,7 +89,13 @@ class PlantService: NSObject, AnyPlantService {
     }
 
     @discardableResult
-    func updatePlant(id: NSManagedObjectID, newName: String, newOverview: String, newWateringDate: Date, newPhoto: UIImage) -> Plant? {
+    func updatePlant(
+        id: NSManagedObjectID,
+        newName: String,
+        newOverview: String,
+        newWateringDate: Date,
+        newPhoto: UIImage
+    ) -> Plant? {
         if let plant = Plant.byId(id, context: context) {
             plant.name = newName
             plant.overview = newOverview

@@ -50,10 +50,9 @@ class PlantListViewModel: AnyPlantListViewModel {
 
     func removePlant(at index: Int) {
         let plant = plants[index]
-        let _ = plantService.removePlant(id: plant.id)
+        _ = plantService.removePlant(id: plant.id)
         notificationsService.removeNotification(id: plant.id)
     }
-
 }
 
 extension PlantListViewModel: AnyPlantServiceDelegate {
@@ -65,6 +64,4 @@ extension PlantListViewModel: AnyPlantServiceDelegate {
     func didReceiveError(error: Error) {
         delegate?.didReceiveError(error: error)
     }
-
-
 }

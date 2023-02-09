@@ -33,5 +33,4 @@ class UIImageTransformer: ValueTransformer {
             return nil
         }
     }
-
 }

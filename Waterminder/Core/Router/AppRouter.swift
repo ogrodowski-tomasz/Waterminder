@@ -15,13 +15,15 @@ enum ImagePickerSource {
 enum AppRoutes {
     case addNewPlant(viewModel: AnyAddPlantViewModel)
     case editPlant(viewModel: AnyEditPlantViewModel)
-    case imagePicker(sourceType: ImagePickerSource, delegate: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate)
+    case imagePicker(
+        sourceType: ImagePickerSource,
+        delegate: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate)
 }
 
 protocol AnyRouter {
     var navigationController: UINavigationController { get set }
     func navigateTo(route: AppRoutes, animated: Bool)
-    func present(_ vc: UIViewController)
+    func present(_ viewController: UIViewController)
     func dismiss(animated: Bool)
     func pop(animated: Bool)
 }
@@ -34,17 +36,17 @@ class AppRouter: AnyRouter {
         self.navigationController = navigationController
     }
 
-    func present(_ vc: UIViewController) {
-        navigationController.present(vc, animated: true)
+    func present(_ viewController: UIViewController) {
+        navigationController.present(viewController, animated: true)
     }
 
     func navigateTo(route: AppRoutes, animated: Bool = true) {
-        let vc: UIViewController
+        let viewController: UIViewController
         switch route {
         case .addNewPlant(let viewModel):
-            vc = AddPlantViewController(viewModel: viewModel, router: self)
+            viewController = AddPlantViewController(viewModel: viewModel, router: self)
         case .editPlant(let viewModel):
-            vc = EditPlantViewController(viewModel: viewModel, router: self)
+            viewController = EditPlantViewController(viewModel: viewModel, router: self)
         case .imagePicker(let sourceType, let delegate):
             let imagePickerController = UIImagePickerController()
             imagePickerController.delegate = delegate
@@ -55,14 +57,12 @@ class AppRouter: AnyRouter {
             case .library:
                 imagePickerController.sourceType = .photoLibrary
             }
-            vc = imagePickerController
-            present(vc)
+            viewController = imagePickerController
+            present(viewController)
             return
         }
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.pushViewController(viewController, animated: true)
     }
-
-
 
     func dismiss(animated: Bool = true) {
         navigationController.dismiss(animated: animated)
@@ -71,8 +71,4 @@ class AppRouter: AnyRouter {
     func pop(animated: Bool = true) {
         navigationController.popViewController(animated: animated)
     }
-
-
-
-
 }

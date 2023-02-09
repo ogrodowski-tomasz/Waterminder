@@ -85,15 +85,30 @@ class PlantListViewController: UIViewController {
         view.addSubview(plantsTableView)
 
         NSLayoutConstraint.activate([
-            addPlantButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 3),
-            addPlantButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: addPlantButton.trailingAnchor, multiplier: 1),
-            addPlantButton.heightAnchor.constraint(equalToConstant: PlantListViewController.addPlantButtonHeight + 10),
-
-            plantsTableView.topAnchor.constraint(equalToSystemSpacingBelow: addPlantButton.bottomAnchor, multiplier: 0),
-            plantsTableView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 0),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: plantsTableView.trailingAnchor, multiplier: 0),
-            plantsTableView.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: 0)
+            addPlantButton.topAnchor.constraint(
+                equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 3
+            ),
+            addPlantButton.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1
+            ),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(
+                equalToSystemSpacingAfter: addPlantButton.trailingAnchor, multiplier: 1
+            ),
+            addPlantButton.heightAnchor.constraint(
+                equalToConstant: PlantListViewController.addPlantButtonHeight + 10
+            ),
+            plantsTableView.topAnchor.constraint(
+                equalToSystemSpacingBelow: addPlantButton.bottomAnchor, multiplier: 0
+            ),
+            plantsTableView.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 0
+            ),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(
+                equalToSystemSpacingAfter: plantsTableView.trailingAnchor, multiplier: 0
+            ),
+            plantsTableView.bottomAnchor.constraint(
+                equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: 0
+            )
         ])
     }
 
@@ -125,7 +140,6 @@ extension PlantListViewController: AnyPlantViewModelDelegate {
 
 }
 
-
 extension PlantListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -133,11 +147,19 @@ extension PlantListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PlantTableViewCell.identifier, for: indexPath) as? PlantTableViewCell else {
+        guard
+            let cell = tableView.dequeueReusableCell(
+            withIdentifier: PlantTableViewCell.identifier,
+            for: indexPath) as? PlantTableViewCell
+        else {
             return UITableViewCell()
         }
         let plant = plantListViewModel.plants[indexPath.row]
-        cell.configure(name: plant.name, overview: plant.overview, photo: plant.photo, wateringDateString: plant.wateringDate)
+        cell.configure(
+            name: plant.name,
+            overview: plant.overview,
+            photo: plant.photo,
+            wateringDateString: plant.wateringDate)
         return cell
     }
 
@@ -154,8 +176,14 @@ extension PlantListViewController: UITableViewDelegate, UITableViewDataSource {
             animated: true)
     }
 
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] action, uiView, handler in
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: "Delete"
+        ) { [weak self] _, _, handler in
             self?.plantListViewModel.removePlant(at: indexPath.row)
             handler(true)
         }

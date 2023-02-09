@@ -40,8 +40,12 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
     }
 
     private func setup() {
-        navigationItem.setLeftBarButton(dismissBarButton(target: self, action: #selector(handleDismissTap)), animated: true)
-        navigationItem.setRightBarButton(saveBarButton(target: self, action: #selector(handleSaveTap)), animated: true)
+        navigationItem.setLeftBarButton(
+            dismissBarButton(target: self, action: #selector(handleDismissTap)
+                            ), animated: true)
+        navigationItem.setRightBarButton(
+            saveBarButton(target: self, action: #selector(handleSaveTap)
+                         ), animated: true)
 
         customSheetView = customSheetView(backgroundColor: UIColor.theme.shamrockGreen)
 
@@ -79,11 +83,78 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
     }
 
     private func layout() {
+        layoutAddPhotoView()
+        layoutCustomSheetView()
+        layoutTextFields()
+        layoutDatePicker()
+    }
+
+    private func layoutAddPhotoView() {
         view.addSubview(addPhotoView)
+        NSLayoutConstraint.activate([
+            addPhotoView.topAnchor.constraint(
+                equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 5
+            ),
+            addPhotoView.centerXAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.centerXAnchor
+            ),
+            addPhotoView.widthAnchor.constraint(
+                equalToConstant: AddPlantViewController.addPhotoButtonHeight
+            ),
+            addPhotoView.heightAnchor.constraint(
+                equalToConstant: AddPlantViewController.addPhotoButtonHeight
+            )
+        ])
+
+    }
+    private func layoutCustomSheetView() {
         view.addSubview(customSheetView)
+        NSLayoutConstraint.activate([
+            customSheetView.topAnchor.constraint(
+                equalToSystemSpacingBelow: view.centerYAnchor, multiplier: 0
+            ),
+            customSheetView.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 0
+            ),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(
+                equalToSystemSpacingAfter: customSheetView.trailingAnchor, multiplier: 0
+            ),
+            customSheetView.bottomAnchor.constraint(
+                equalToSystemSpacingBelow: view.bottomAnchor, multiplier: 0
+            )
+        ])
+    }
+    private func layoutTextFields() {
         customSheetView.addSubview(nameTextField)
         customSheetView.addSubview(overviewTextField)
-
+        NSLayoutConstraint.activate([
+            nameTextField.topAnchor.constraint(
+                equalToSystemSpacingBelow: customSheetView.topAnchor, multiplier: 3
+            ),
+            nameTextField.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: customSheetView.leadingAnchor, multiplier: 2
+            ),
+            customSheetView.trailingAnchor.constraint(
+                equalToSystemSpacingAfter: nameTextField.trailingAnchor, multiplier: 2
+            ),
+            nameTextField.heightAnchor.constraint(
+                equalToConstant: 60
+            ),
+            overviewTextField.topAnchor.constraint(
+                equalToSystemSpacingBelow: nameTextField.bottomAnchor, multiplier: 1
+            ),
+            overviewTextField.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: customSheetView.leadingAnchor, multiplier: 2
+            ),
+            customSheetView.trailingAnchor.constraint(
+                equalToSystemSpacingAfter: overviewTextField.trailingAnchor, multiplier: 2
+            ),
+            overviewTextField.heightAnchor.constraint(
+                equalToConstant: 60
+            )
+        ])
+    }
+    private func layoutDatePicker() {
         let datePickerStack = UIStackView(arrangedSubviews: [datePickerLabel, datePicker])
         datePickerStack.translatesAutoresizingMaskIntoConstraints = false
         datePickerStack.axis = .horizontal
@@ -91,32 +162,19 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
         datePickerStack.alignment = .center
         datePickerStack.distribution = .equalSpacing
         view.addSubview(datePickerStack)
-
         NSLayoutConstraint.activate([
-            addPhotoView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 5),
-            addPhotoView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            addPhotoView.widthAnchor.constraint(equalToConstant: AddPlantViewController.addPhotoButtonHeight),
-            addPhotoView.heightAnchor.constraint(equalToConstant: AddPlantViewController.addPhotoButtonHeight),
-
-            customSheetView.topAnchor.constraint(equalToSystemSpacingBelow: view.centerYAnchor, multiplier: 0),
-            customSheetView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 0),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalToSystemSpacingAfter: customSheetView.trailingAnchor, multiplier: 0),
-            customSheetView.bottomAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: 0),
-
-            nameTextField.topAnchor.constraint(equalToSystemSpacingBelow: customSheetView.topAnchor, multiplier: 3),
-            nameTextField.leadingAnchor.constraint(equalToSystemSpacingAfter: customSheetView.leadingAnchor, multiplier: 2),
-            customSheetView.trailingAnchor.constraint(equalToSystemSpacingAfter: nameTextField.trailingAnchor, multiplier: 2),
-            nameTextField.heightAnchor.constraint(equalToConstant: 60),
-
-            overviewTextField.topAnchor.constraint(equalToSystemSpacingBelow: nameTextField.bottomAnchor, multiplier: 1),
-            overviewTextField.leadingAnchor.constraint(equalToSystemSpacingAfter: customSheetView.leadingAnchor, multiplier: 2),
-            customSheetView.trailingAnchor.constraint(equalToSystemSpacingAfter: overviewTextField.trailingAnchor, multiplier: 2),
-            overviewTextField.heightAnchor.constraint(equalToConstant: 60),
-
-            datePickerStack.topAnchor.constraint(equalToSystemSpacingBelow: overviewTextField.bottomAnchor, multiplier: 1),
-            datePickerStack.leadingAnchor.constraint(equalToSystemSpacingAfter: customSheetView.leadingAnchor, multiplier: 1),
-            customSheetView.trailingAnchor.constraint(equalToSystemSpacingAfter: datePickerStack.trailingAnchor, multiplier: 2),
-            datePickerStack.heightAnchor.constraint(equalToConstant: 60)
+            datePickerStack.topAnchor.constraint(
+                equalToSystemSpacingBelow: overviewTextField.bottomAnchor, multiplier: 1
+            ),
+            datePickerStack.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: customSheetView.leadingAnchor, multiplier: 1
+            ),
+            customSheetView.trailingAnchor.constraint(
+                equalToSystemSpacingAfter: datePickerStack.trailingAnchor, multiplier: 2
+            ),
+            datePickerStack.heightAnchor.constraint(
+                equalToConstant: 60
+            )
         ])
     }
 
@@ -152,7 +210,6 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
         router.present(actionSheet)
     }
 
-
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameTextField {
             overviewTextField.becomeFirstResponder()
@@ -165,7 +222,10 @@ class AddPlantViewController: UIViewController, UITextFieldDelegate {
 }
 
 extension AddPlantViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             addPhotoView.image = pickedImage
         } else {
@@ -174,5 +234,3 @@ extension AddPlantViewController: UINavigationControllerDelegate, UIImagePickerC
         dismiss(animated: true)
     }
 }
-
-

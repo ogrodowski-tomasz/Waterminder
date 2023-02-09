@@ -99,6 +99,7 @@ class EditPlantViewController: UIViewController {
         view.addGestureRecognizer(bgTap)
     }
 
+    // swiftlint:disable:next function_body_length
     private func layout() {
         view.addSubview(customSheetView)
         let datePickerStack = UIStackView(arrangedSubviews: [datePickerLabel, datePicker])
@@ -118,20 +119,42 @@ class EditPlantViewController: UIViewController {
         view.addSubview(addPhotoView)
 
         NSLayoutConstraint.activate([
-            customSheetView.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 0),
-            customSheetView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: customSheetView.trailingAnchor, multiplier: 0),
-            customSheetView.heightAnchor.constraint(equalToConstant: 300),
-
-            customSheetStack.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1),
-            customSheetStack.leadingAnchor.constraint(equalToSystemSpacingAfter: customSheetView.leadingAnchor, multiplier: 1),
-            customSheetView.trailingAnchor.constraint(equalToSystemSpacingAfter: customSheetStack.trailingAnchor, multiplier: 1),
-            customSheetView.bottomAnchor.constraint(equalToSystemSpacingBelow: customSheetStack.bottomAnchor, multiplier: 5),
-
-            addPhotoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            addPhotoView.widthAnchor.constraint(equalToConstant: Self.imageSide),
-            addPhotoView.topAnchor.constraint(equalToSystemSpacingBelow: customSheetView.bottomAnchor, multiplier: 5),
-            addPhotoView.heightAnchor.constraint(equalToConstant: Self.imageSide),
+            customSheetView.topAnchor.constraint(
+                equalToSystemSpacingBelow: view.topAnchor, multiplier: 0
+            ),
+            customSheetView.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0
+            ),
+            view.trailingAnchor.constraint(
+                equalToSystemSpacingAfter: customSheetView.trailingAnchor, multiplier: 0
+            ),
+            customSheetView.heightAnchor.constraint(
+                equalToConstant: 300
+            ),
+            customSheetStack.topAnchor.constraint(
+                equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1
+            ),
+            customSheetStack.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: customSheetView.leadingAnchor, multiplier: 1
+            ),
+            customSheetView.trailingAnchor.constraint(
+                equalToSystemSpacingAfter: customSheetStack.trailingAnchor, multiplier: 1
+            ),
+            customSheetView.bottomAnchor.constraint(
+                equalToSystemSpacingBelow: customSheetStack.bottomAnchor, multiplier: 5
+            ),
+            addPhotoView.centerXAnchor.constraint(
+                equalTo: view.centerXAnchor
+            ),
+            addPhotoView.widthAnchor.constraint(
+                equalToConstant: Self.imageSide
+            ),
+            addPhotoView.topAnchor.constraint(
+                equalToSystemSpacingBelow: customSheetView.bottomAnchor, multiplier: 5
+            ),
+            addPhotoView.heightAnchor.constraint(
+                equalToConstant: Self.imageSide
+            )
         ])
     }
 
@@ -150,7 +173,11 @@ class EditPlantViewController: UIViewController {
         guard let newName = nameTextField.text else { return }
         guard let newOverview = overviewTextField.text else { return }
         guard let newPhoto = addPhotoView.image else { return }
-        viewModel.updatePlant(newName: newName, newOverview: newOverview, newWateringDate: datePicker.date, newPhoto: newPhoto)
+        viewModel.updatePlant(
+            newName: newName,
+            newOverview: newOverview,
+            newWateringDate: datePicker.date,
+            newPhoto: newPhoto)
         router.pop(animated: true)
     }
 
@@ -164,7 +191,10 @@ class EditPlantViewController: UIViewController {
 }
 
 extension EditPlantViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             addPhotoView.image = pickedImage
         } else {

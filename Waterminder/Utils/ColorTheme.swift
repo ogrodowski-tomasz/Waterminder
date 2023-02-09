@@ -15,6 +15,4 @@ struct ColorTheme {
 extension UIColor {
     static let theme = ColorTheme()
 }
-
-
 // <a href="https://www.flaticon.com/free-icons/plant" title="plant icons">Plant icons created by Freepik - Flaticon</a>

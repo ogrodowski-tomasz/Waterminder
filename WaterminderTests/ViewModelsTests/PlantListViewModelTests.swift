@@ -6,7 +6,6 @@
 //
 
 import XCTest
-
 @testable import Waterminder
 
 final class PlantListViewModelTests: XCTestCase {
@@ -56,16 +55,22 @@ final class PlantListViewModelTests: XCTestCase {
         let overview = "Default overview"
         let wateringDate = Date()
         guard let photo = UIImage(named: "plant") else {
-            XCTFail()
+            XCTFail("No such image in assets")
             return
         }
-        let _ = plantService.addPlant(name: name, overview: overview, wateringDate: wateringDate, photo: photo)
+        let id = plantService.addPlant(name: name, overview: overview, wateringDate: wateringDate, photo: photo)
 
         // When
         plantListViewModel.getPlants()
 
         // Then
         XCTAssertEqual(plantListViewModel.plants.count, 1)
+        let plantModel = plantListViewModel.plants[0]
+        XCTAssertEqual(plantModel.name, name)
+        XCTAssertEqual(plantModel.overview, overview)
+        XCTAssertEqual(plantModel.id, id)
+        XCTAssertEqual(plantModel.wateringDate, wateringDate.toString)
+        XCTAssertTrue(photo.isEqualTo(image: plantModel.photo))
         XCTAssertTrue(mockPlantListViewModelDelegate.plantsReceived)
     }
 

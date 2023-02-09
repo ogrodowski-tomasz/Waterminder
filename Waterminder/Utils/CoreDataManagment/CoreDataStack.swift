@@ -16,9 +16,11 @@ class CoreDataStack {
     var viewContext: NSManagedObjectContext { persistentContainer.viewContext }
 
     init() {
-        ValueTransformer.setValueTransformer(UIImageTransformer(), forName: NSValueTransformerName("UIImageTransformer"))
+        ValueTransformer.setValueTransformer(
+            UIImageTransformer(),
+            forName: NSValueTransformerName("UIImageTransformer"))
         persistentContainer = NSPersistentContainer(name: "PlantContainer")
-        persistentContainer.loadPersistentStores { storeDescription, error in
+        persistentContainer.loadPersistentStores { _, error in
             if let error {
                 fatalError("Error initializing Core Data: \(error)")
             }

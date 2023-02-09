@@ -21,6 +21,4 @@ class MockPlantListViewModelDelegate: AnyPlantViewModelDelegate {
         errorReceived = true
         errorMessage = error.localizedDescription
     }
-
-
 }

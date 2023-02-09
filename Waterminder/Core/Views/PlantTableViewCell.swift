@@ -77,15 +77,30 @@ class PlantTableViewCell: UITableViewCell {
         addSubview(labelStack)
 
         NSLayoutConstraint.activate([
-            photoImageView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
-            photoImageView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
-            photoImageView.heightAnchor.constraint(equalToConstant: PlantTableViewCell.imageHeight),
-            photoImageView.widthAnchor.constraint(equalToConstant: PlantTableViewCell.imageHeight),
-            bottomAnchor.constraint(equalToSystemSpacingBelow: photoImageView.bottomAnchor, multiplier: 1),
-
-            labelStack.leadingAnchor.constraint(equalToSystemSpacingAfter: photoImageView.trailingAnchor, multiplier: 1),
-            labelStack.centerYAnchor.constraint(equalTo: photoImageView.centerYAnchor),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: labelStack.trailingAnchor, multiplier: 1)
+            photoImageView.topAnchor.constraint(
+                equalToSystemSpacingBelow: topAnchor, multiplier: 1
+            ),
+            photoImageView.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: leadingAnchor, multiplier: 1
+            ),
+            photoImageView.heightAnchor.constraint(
+                equalToConstant: PlantTableViewCell.imageHeight
+            ),
+            photoImageView.widthAnchor.constraint(
+                equalToConstant: PlantTableViewCell.imageHeight
+            ),
+            bottomAnchor.constraint(
+                equalToSystemSpacingBelow: photoImageView.bottomAnchor, multiplier: 1
+            ),
+            labelStack.leadingAnchor.constraint(
+                equalToSystemSpacingAfter: photoImageView.trailingAnchor, multiplier: 1
+            ),
+            labelStack.centerYAnchor.constraint(
+                equalTo: photoImageView.centerYAnchor
+            ),
+            trailingAnchor.constraint(
+                equalToSystemSpacingAfter: labelStack.trailingAnchor, multiplier: 1
+            )
         ])
     }
 

@@ -35,7 +35,7 @@ class EditPlantViewModel: AnyEditPlantViewModel {
     }
 
     func updatePlant(newName: String, newOverview: String, newWateringDate: Date, newPhoto: UIImage) {
-        let _ = plantService.updatePlant(
+        _ = plantService.updatePlant(
             id: plant.id,
             newName: newName,
             newOverview: newOverview,

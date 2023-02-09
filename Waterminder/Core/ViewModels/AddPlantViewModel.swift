@@ -32,6 +32,4 @@ class AddPlantViewModel: AnyAddPlantViewModel {
             notificationsService.scheduleNotification(id: id, title: name, triggerDate: wateringDate)
         }
     }
-
-
 }
