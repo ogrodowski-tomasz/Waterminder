@@ -14,6 +14,9 @@
 		1E5A3B08299165B300E4A750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E5A3B07299165B300E4A750 /* Assets.xcassets */; };
 		1E5A3B0B299165B300E4A750 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E5A3B09299165B300E4A750 /* LaunchScreen.storyboard */; };
 		1E5A3B13299166A500E4A750 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5A3B12299166A500E4A750 /* ColorTheme.swift */; };
+		1E690ED529942E47006D8C28 /* MockCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E690ED429942E47006D8C28 /* MockCoreDataStack.swift */; };
+		1E690EDC299433C7006D8C28 /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E690EDB299433C7006D8C28 /* CoreDataStackTests.swift */; };
+		1E690EDE29943529006D8C28 /* MockPlantServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E690EDD29943529006D8C28 /* MockPlantServiceDelegate.swift */; };
 		1E7E7ACC2991A195004E7167 /* PlantModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7ACB2991A195004E7167 /* PlantModel.swift */; };
 		1E7E7ACF2991A2F9004E7167 /* PlantContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7ACD2991A2F9004E7167 /* PlantContainer.xcdatamodeld */; };
 		1E7E7AD22991A35B004E7167 /* UIImageTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E7AD12991A35B004E7167 /* UIImageTransformer.swift */; };
@@ -55,6 +58,9 @@
 		1E5A3B0A299165B300E4A750 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E5A3B0C299165B300E4A750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E5A3B12299166A500E4A750 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
+		1E690ED429942E47006D8C28 /* MockCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataStack.swift; sourceTree = "<group>"; };
+		1E690EDB299433C7006D8C28 /* CoreDataStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackTests.swift; sourceTree = "<group>"; };
+		1E690EDD29943529006D8C28 /* MockPlantServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPlantServiceDelegate.swift; sourceTree = "<group>"; };
 		1E7E7ACB2991A195004E7167 /* PlantModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantModel.swift; sourceTree = "<group>"; };
 		1E7E7ACE2991A2F9004E7167 /* PlantContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlantContainer.xcdatamodel; sourceTree = "<group>"; };
 		1E7E7AD12991A35B004E7167 /* UIImageTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageTransformer.swift; sourceTree = "<group>"; };
@@ -106,6 +112,8 @@
 		1E0B5CB32993B450009BE44B /* WaterminderTests */ = {
 			isa = PBXGroup;
 			children = (
+				1E690ED8299433AA006D8C28 /* CoreDataTests */,
+				1E690ED429942E47006D8C28 /* MockCoreDataStack.swift */,
 				1E0B5CBB2993B459009BE44B /* ExtensionsTests */,
 			);
 			path = WaterminderTests;
@@ -162,6 +170,15 @@
 				1E7E7ACA2991A18C004E7167 /* Model */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		1E690ED8299433AA006D8C28 /* CoreDataTests */ = {
+			isa = PBXGroup;
+			children = (
+				1E690EDB299433C7006D8C28 /* CoreDataStackTests.swift */,
+				1E690EDD29943529006D8C28 /* MockPlantServiceDelegate.swift */,
+			);
+			path = CoreDataTests;
 			sourceTree = "<group>";
 		};
 		1E7E7ACA2991A18C004E7167 /* Model */ = {
@@ -339,7 +356,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E690EDE29943529006D8C28 /* MockPlantServiceDelegate.swift in Sources */,
 				1E0B5CBD2993B476009BE44B /* UIImageExtensionsTests.swift in Sources */,
+				1E690ED529942E47006D8C28 /* MockCoreDataStack.swift in Sources */,
+				1E690EDC299433C7006D8C28 /* CoreDataStackTests.swift in Sources */,
 				1E0B5CBF2993B610009BE44B /* DateExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

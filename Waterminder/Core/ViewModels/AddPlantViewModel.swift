@@ -28,7 +28,9 @@ class AddPlantViewModel: AnyAddPlantViewModel {
 
     func addPlant(name: String, overview: String, wateringDate: Date, photo: UIImage) {
         let id = plantService.addPlant(name: name, overview: overview, wateringDate: wateringDate, photo: photo)
-        notificationsService.scheduleNotification(id: id, title: name, triggerDate: wateringDate)
+        if let id {
+            notificationsService.scheduleNotification(id: id, title: name, triggerDate: wateringDate)
+        }
     }
 
 

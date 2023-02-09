@@ -10,11 +10,11 @@ import UIKit
 
 protocol AnyPlantService {
     var delegate: AnyPlantServiceDelegate? { get set }
-    var fetchedPlantsController: NSFetchedResultsController<Plant> { get }
+    var context: NSManagedObjectContext { get }
     func getPlants()
-    func addPlant(name: String, overview: String, wateringDate: Date, photo: UIImage) -> NSManagedObjectID
-    func removePlant(id: NSManagedObjectID)
-    func updatePlant(id: NSManagedObjectID, newName: String, newOverview: String, newWateringDate: Date, newPhoto: UIImage)
+    func addPlant(name: String, overview: String, wateringDate: Date, photo: UIImage) -> NSManagedObjectID?
+    func removePlant(id: NSManagedObjectID) -> Bool
+    func updatePlant(id: NSManagedObjectID, newName: String, newOverview: String, newWateringDate: Date, newPhoto: UIImage) -> Plant?
 }
 
 protocol AnyPlantServiceDelegate: AnyObject {
@@ -24,18 +24,18 @@ protocol AnyPlantServiceDelegate: AnyObject {
 
 class PlantService: NSObject, AnyPlantService {
 
-    let coreDataStack: CoreDataStack
+    let context: NSManagedObjectContext
 
     let fetchedPlantsController: NSFetchedResultsController<Plant>
 
     weak var delegate: AnyPlantServiceDelegate?
 
-    init(coreDataStack: CoreDataStack = CoreDataStack.shared) {
-        self.coreDataStack = coreDataStack
+    init(context: NSManagedObjectContext = CoreDataStack.shared.viewContext) {
+        self.context = context
 
         fetchedPlantsController = NSFetchedResultsController(
             fetchRequest: Plant.fetchRequest(),
-            managedObjectContext: coreDataStack.viewContext,
+            managedObjectContext: context,
             sectionNameKeyPath: nil,
             cacheName: nil)
         super.init()
@@ -53,32 +53,52 @@ class PlantService: NSObject, AnyPlantService {
         }
     }
 
-    func addPlant(name: String, overview: String, wateringDate: Date, photo: UIImage) -> NSManagedObjectID {
-        let newPlant = Plant(context: coreDataStack.viewContext)
+    func addPlant(name: String, overview: String, wateringDate: Date, photo: UIImage) -> NSManagedObjectID? {
+        let newPlant = Plant(context: context)
         newPlant.name = name
         newPlant.overview = overview
         newPlant.wateringDate = wateringDate
         newPlant.photo = photo
-        coreDataStack.saveContext()
-        return newPlant.objectID
-    }
-
-    func removePlant(id: NSManagedObjectID) {
-        if let plant = Plant.byId(id, context: coreDataStack.viewContext) {
-            coreDataStack.viewContext.delete(plant)
-            coreDataStack.saveContext()
+        do {
+            try context.save()
+            return newPlant.objectID
+        } catch {
+            delegate?.didReceiveError(error: error)
+            return nil
         }
     }
 
-    func updatePlant(id: NSManagedObjectID, newName: String, newOverview: String, newWateringDate: Date, newPhoto: UIImage) {
-        if let plant = Plant.byId(id, context: coreDataStack.viewContext) {
+    @discardableResult
+    func removePlant(id: NSManagedObjectID) -> Bool {
+        if let plant = Plant.byId(id, context: context) {
+            context.delete(plant)
+            do {
+                try context.save()
+                return true
+            } catch {
+                delegate?.didReceiveError(error: error)
+            }
+        }
+        return false
+    }
+
+    @discardableResult
+    func updatePlant(id: NSManagedObjectID, newName: String, newOverview: String, newWateringDate: Date, newPhoto: UIImage) -> Plant? {
+        if let plant = Plant.byId(id, context: context) {
             plant.name = newName
             plant.overview = newOverview
             plant.wateringDate = newWateringDate
             plant.photo = newPhoto
-            coreDataStack.saveContext()
+            do {
+                try context.save()
+                return plant
+            } catch {
+                delegate?.didReceiveError(error: error)
+                return nil
+            }
         } else {
             print("DEBUG: no plant with this id")
+            return nil
         }
     }
 
@@ -87,8 +107,6 @@ class PlantService: NSObject, AnyPlantService {
 extension PlantService: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let plants = controller.fetchedObjects as? [Plant] else { return }
-        DispatchQueue.main.async { [weak self] in
-            self?.delegate?.didReceivePlants(plants: plants)
-        }
+        delegate?.didReceivePlants(plants: plants)
     }
 }

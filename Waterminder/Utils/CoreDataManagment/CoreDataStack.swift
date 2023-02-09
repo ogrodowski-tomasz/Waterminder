@@ -24,13 +24,4 @@ class CoreDataStack {
             }
         }
     }
-
-    func saveContext() {
-        do {
-            try viewContext.save()
-            print("DEBUG: Successfully saved context")
-        } catch {
-            fatalError("Unresolved error: \(error)")
-        }
-    }
 }
