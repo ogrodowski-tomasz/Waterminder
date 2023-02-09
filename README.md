@@ -19,7 +19,7 @@
 </b>
 Flow is designed with <b>Delegates</b>.
 
-Whole code is also <b>swiftlited</b>
+Whole code is also linted with <b>Swiftlint</b>
 </p>
 
 ## Screenshots
