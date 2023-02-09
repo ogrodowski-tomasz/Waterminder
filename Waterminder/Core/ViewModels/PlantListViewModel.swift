@@ -50,7 +50,7 @@ class PlantListViewModel: AnyPlantListViewModel {
 
     func removePlant(at index: Int) {
         let plant = plants[index]
-        plantService.removePlant(id: plant.id)
+        let _ = plantService.removePlant(id: plant.id)
         notificationsService.removeNotification(id: plant.id)
     }
 
